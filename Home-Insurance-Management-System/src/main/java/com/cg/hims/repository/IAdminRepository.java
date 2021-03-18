@@ -1,5 +1,9 @@
 package com.cg.hims.repository;
 
-public interface IAdminRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cg.hims.entities.Admin;
+
+public interface IAdminRepository extends JpaRepository<Admin,Integer>{
 
 }
