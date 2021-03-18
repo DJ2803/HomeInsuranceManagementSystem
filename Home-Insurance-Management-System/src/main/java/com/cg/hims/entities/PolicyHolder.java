@@ -12,6 +12,7 @@ public class PolicyHolder {
 	private double annualIncome;
 	private String isRetired;
 	private String emailId;
+	
 	private int policyId;
 	
 }
