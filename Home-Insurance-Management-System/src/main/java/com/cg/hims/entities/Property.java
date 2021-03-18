@@ -35,12 +35,4 @@ public class Property {
 //	private int fullBathCount;
 //	private int halfBathCount;
 	private boolean hasSwimmingPool;
-
-	
-	
-	
-	
-	
-	
-	
 }
