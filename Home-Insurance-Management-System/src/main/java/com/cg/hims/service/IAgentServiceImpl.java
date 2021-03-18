@@ -84,7 +84,7 @@ public class IAgentServiceImpl implements IAgentService{
 		}catch(Exception e) {
 			//converting SQLException to EmployeeException
 			throw new AgentNotFoundException(e.getMessage());
-		}
+		 }
 	}
 
 	@Override
