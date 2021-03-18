@@ -2,27 +2,9 @@ package com.cg.hims.entities;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-@Entity
-@Table(name = "agent")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class Agent {
 	
-	@Id
+	
 	private int agentId;
 	private String agentName;
 	private String designation;
@@ -31,15 +13,8 @@ public class Agent {
 	private String email;
 	private String mobileNo;
 	
-	@OneToMany(mappedBy="agent")
-	@JoinColumn(name = "userId")
 	private List<PolicyHolder> policyHoldersList;
-	private List<Quote> quoteList;
-	
-
-	
-	
-	
+	private List<Policy> policies;
 	
 
 }
