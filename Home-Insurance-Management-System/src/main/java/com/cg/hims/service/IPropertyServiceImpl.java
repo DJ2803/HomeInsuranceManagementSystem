@@ -47,8 +47,9 @@ public class IPropertyServiceImpl implements IPropertyService{
 		try {
 			Optional<Property> optional= holderProperty.findById(propertyId);
 			return optional.get();
-			
-		}catch(DataAccessException e) {
+			  
+		}
+		catch(DataAccessException e) {
 			//converting SQLException to EmployeeException
 			throw new Exception(e.getMessage());
 		}
