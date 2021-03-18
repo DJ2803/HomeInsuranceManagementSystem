@@ -24,20 +24,21 @@ import lombok.ToString;
 @ToString
 public class Agent {
 	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int agentId;
 	private String agentName;
 	private String designation;
-	private String salary; 
+	private Double salary; 
 //	private String address;
 //	private String email;
 //	private String mobileNo;
 	
-	@OneToMany(mappedBy="agent")
+	//@OneToMany(mappedBy="agent")
 	
-	private List<PolicyHolder> policyHoldersList;
-	private List<Quote> quoteList;
+//	private List<PolicyHolder> policyHoldersList;
+//	private List<Quote> quoteList;
 	
 
 	

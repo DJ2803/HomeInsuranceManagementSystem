@@ -1,5 +1,6 @@
 package com.cg.hims.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,27 @@ public class IPropertyServiceImpl implements IPropertyService{
 			throw new Exception(e.getMessage());
 		}
 	}
-
-	public Property viewProperty() throws Exception
+	
+	@Override
+	public Property updateProperty(Property property) throws Exception
 	{
 		try {
-			return (Property)holderProperty;
+			return holderProperty.save(property);
+		}catch(Exception e) {
+			//converting SQLException to EmployeeException
+			throw new Exception(e.getMessage());
+		}
+		
+		
+		
+	}
+
+	public Property viewProperty(int propertyId) throws Exception
+	{
+		try {
+			Optional<Property> optional= holderProperty.findById(propertyId);
+			return optional.get();
+			
 		}catch(DataAccessException e) {
 			//converting SQLException to EmployeeException
 			throw new Exception(e.getMessage());

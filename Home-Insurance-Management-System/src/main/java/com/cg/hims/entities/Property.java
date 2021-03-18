@@ -25,7 +25,7 @@ public class Property {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int quoteId;
+	private int propertyId;
 	private int marketValue;
 	private int yearBuilt;
 	private int squareFootage;
@@ -35,4 +35,7 @@ public class Property {
 //	private int fullBathCount;
 //	private int halfBathCount;
 	private boolean hasSwimmingPool;
+	
+	
+	
 }
