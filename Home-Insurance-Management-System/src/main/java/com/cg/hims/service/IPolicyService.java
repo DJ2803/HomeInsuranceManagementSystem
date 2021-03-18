@@ -7,13 +7,13 @@ import com.cg.hims.exceptions.PolicyNotFoundException;
 
 public interface IPolicyService {
 
-	public Policy addPolicy(Policy policy);
+	public void addPolicy(Policy policy);
 
-	public Policy updatePolicy(Policy policy) throws PolicyNotFoundException;
+	public void updatePolicy(Policy policy) throws PolicyNotFoundException;
 
-	public Policy findPolicyById(int policyId) throws PolicyNotFoundException;
+	public Policy findPolicyById(Integer policyId) throws PolicyNotFoundException;
 
-	public Policy removePolicy(int policyId) throws PolicyNotFoundException;
+	public void removePolicy(Integer policyId) throws PolicyNotFoundException;
 
 	public List<Policy> showAllPolicies();
 
