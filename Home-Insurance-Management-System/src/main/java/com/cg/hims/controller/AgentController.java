@@ -24,12 +24,12 @@ import com.cg.hims.service.IAgentService;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/agent")
 public class AgentController {
 	@Autowired
 	private IAgentService agentService;
 
-	@PostMapping("/agent")
+	@PostMapping("/addAgent")
 	public ResponseEntity<Agent> addAgent(@RequestBody Agent agent) {
 		try {
 			Agent agt= agentService.addAgent(agent);
@@ -39,7 +39,7 @@ public class AgentController {
 		}
 	}
 
-	@PutMapping("/agent")
+	@PutMapping("/updateAgent")
 	public ResponseEntity<Agent> updateAgent(@RequestBody Agent agent) {
 		try {
 			Agent agt= agentService.updateAgent(agent);
@@ -49,7 +49,7 @@ public class AgentController {
 		}
 	}
 
-	@DeleteMapping("/agent/{agtid}")
+	@DeleteMapping("/removeAgent/{agtId}")
 	public ResponseEntity<String> removeAgent(@PathVariable Integer agtId) {
 		try {
 			agentService.removeAgent(agtId);
@@ -59,7 +59,7 @@ public class AgentController {
 		}
 	}
 
-	@GetMapping("/agent/{agtId}")
+	@GetMapping("/findAgentById/{agtId}")
 	public ResponseEntity<Agent> findAgentById(@PathVariable Integer agtId){
 		try {
 			Agent agent = agentService.findAgentById(agtId);
@@ -69,8 +69,8 @@ public class AgentController {
 		}
 
 	}
-	
-	@GetMapping("/agent")
+
+	@GetMapping("/viewAllAgents")
 	public ResponseEntity<List<Agent>> viewAllAgents(){
 		try {
 			List<Agent> agentList = agentService.viewAllAgents();
@@ -79,5 +79,5 @@ public class AgentController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	
+
 }

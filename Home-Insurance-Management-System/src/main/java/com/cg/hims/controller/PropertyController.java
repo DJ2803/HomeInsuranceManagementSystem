@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +21,13 @@ import com.cg.hims.exceptions.AgentNotFoundException;
 import com.cg.hims.service.IPropertyService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/property")
 public class PropertyController {
 
 	@Autowired
 	private IPropertyService propertyService;
 	private Property ppt;
-	@PostMapping("/property")
+	@PostMapping("/addProperty")
 	public ResponseEntity<Property> addProperty(@RequestBody Property property) {
 		try {
 			 ppt= propertyService.addProperty(property);
@@ -36,8 +37,8 @@ public class PropertyController {
 		}
 	}
 	
-	@PutMapping("/property")
-	public ResponseEntity<Property> updateAgent(@RequestBody Property property) {
+	@PutMapping("/updateProperty")
+	public ResponseEntity<Property> updateProperty(@RequestBody Property property) {
 		try {
 			 ppt= propertyService.updateProperty(property);
 			return new ResponseEntity<>(ppt, HttpStatus.OK);
@@ -46,7 +47,18 @@ public class PropertyController {
 		}
 	}
 	
-	@GetMapping("/property")
+	@GetMapping("/findPropertyById/{propertyId}")
+	public ResponseEntity<Property> findPropertyById(@PathVariable Integer propertyId){
+		try {
+			 ppt = propertyService.findPropertyById(propertyId);
+			return new ResponseEntity<>(ppt, HttpStatus.OK);
+		}catch(Exception e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+
+	}
+	
+	@GetMapping("/viewProperty")
 	public ResponseEntity<Property> viewProperty(){
 		try {
 			

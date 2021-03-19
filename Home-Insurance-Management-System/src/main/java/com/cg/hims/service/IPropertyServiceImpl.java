@@ -32,7 +32,12 @@ public class IPropertyServiceImpl implements IPropertyService{
 	public Property updateProperty(Property property) throws Exception
 	{
 		try {
-			return holderProperty.save(property);
+			Optional<Property> optional= holderProperty.findById(property.getPropertyId());
+			if(optional.isPresent()){
+			return holderProperty.save(property);}
+			else{
+				throw new Exception("Property does not exist");
+			}
 		}catch(Exception e) {
 			//converting SQLException to EmployeeException
 			throw new Exception(e.getMessage());
@@ -42,6 +47,18 @@ public class IPropertyServiceImpl implements IPropertyService{
 		
 	}
 
+	public Property findPropertyById(int propertyId)throws Exception
+	{
+		try {
+			Optional<Property> optional= holderProperty.findById(propertyId);
+			return optional.get();
+			  
+		}
+		catch(DataAccessException e) {
+			//converting SQLException to EmployeeException
+			throw new Exception(e.getMessage());
+		}
+	}
 	public Property viewProperty(int propertyId) throws Exception
 	{
 		try {
