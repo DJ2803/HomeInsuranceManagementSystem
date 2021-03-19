@@ -31,12 +31,12 @@ public class AdminServiceImpl implements AdminService
 {
 	@Autowired
 	private AgentRepository iAgentRepository;
-//	@Autowired
-//	private IPolicyHolderRepository iPolicyHolderRepository;
+	@Autowired
+	private PolicyHolderRepository iPolicyHolderRepository;
 //	@Autowired
 //	private ITransactionRepository iITransactionRepository;
-//	@Autowired
-//	private IPolicyRepository iPolicyRepository;
+	@Autowired
+	private PolicyRepository iPolicyRepository;
 	@Autowired
 	private AdminRepository iAdminRepository;
 	@Override
@@ -101,65 +101,65 @@ public class AdminServiceImpl implements AdminService
 		}
 	}
 
-//	@Override
-//	public PolicyHolder addPolicyHolder(PolicyHolder policyHolder) throws PolicyHolderNotFoundException {
-//		try {			
-//			return iPolicyHolderRepository.save(policyHolder);
-//		}catch(DataAccessException e) {
-//			throw new PolicyHolderNotFoundException(e.getMessage());
-//		}catch(Exception e) {
-//			throw new PolicyHolderNotFoundException(e.getMessage());
-//		}
-//	}
-//
-//	@Override
-//	public PolicyHolder updatePolicyHolder(PolicyHolder policyHolder) throws PolicyHolderNotFoundException {
-//		try {			
-//			return iPolicyHolderRepository.save(policyHolder);
-//		}catch(DataAccessException e) {
-//			throw new PolicyHolderNotFoundException(e.getMessage());
-//		}catch(Exception e) {
-//			throw new PolicyHolderNotFoundException(e.getMessage());
-//		}
-//	}
-//
-//	@Override
-//	public void deletePolicyHolder(Integer policyHolderId) throws PolicyHolderNotFoundException {
-//		try {			
-//			iPolicyHolderRepository.deleteById(policyHolderId);
-//		}catch(DataAccessException e) {
-//			throw new PolicyHolderNotFoundException(e.getMessage());
-//		}catch(Exception e) {
-//			throw new PolicyHolderNotFoundException(e.getMessage());
-//		}
-//	}
-//
-//	@Override
-//	public PolicyHolder getPolicyHolderById(Integer policyHolderId) throws PolicyHolderNotFoundException {
-//		try {
-//			Optional<PolicyHolder> optional=iPolicyHolderRepository.findById(policyHolderId);
-//			if(optional.isPresent()) {
-//				return optional.get();
-//			}else {
-//				throw new Exception("Invalid PolicyHolder Id");
-//			}
-//		}catch(DataAccessException e) {
-//			throw new PolicyHolderNotFoundException(e.getMessage());
-//		}catch(Exception e) {
-//			throw new PolicyHolderNotFoundException(e.getMessage());
-//		}
-//	}
-//
-//	@Override
-//	public List<PolicyHolder> getAllPolicyHolders() throws PolicyHolderNotFoundException {
-//		try {			
-//			return iPolicyHolderRepository.findAll();
-//		}catch(DataAccessException e) {
-//			throw new PolicyHolderNotFoundException(e.getMessage());
-//		}catch(Exception e) {
-//			throw new PolicyHolderNotFoundException(e.getMessage());
-//		}
-//	}
+	@Override
+	public PolicyHolder addPolicyHolder(PolicyHolder policyHolder) throws PolicyHolderNotFoundException {
+		try {			
+			return iPolicyHolderRepository.save(policyHolder);
+		}catch(DataAccessException e) {
+			throw new PolicyHolderNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			throw new PolicyHolderNotFoundException(e.getMessage());
+		}
+	}
+
+	@Override
+	public PolicyHolder updatePolicyHolder(PolicyHolder policyHolder) throws PolicyHolderNotFoundException {
+		try {			
+			return iPolicyHolderRepository.save(policyHolder);
+		}catch(DataAccessException e) {
+			throw new PolicyHolderNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			throw new PolicyHolderNotFoundException(e.getMessage());
+		}
+	}
+
+	@Override
+	public void deletePolicyHolder(Integer policyHolderId) throws PolicyHolderNotFoundException {
+		try {			
+			iPolicyHolderRepository.deleteById(policyHolderId);
+		}catch(DataAccessException e) {
+			throw new PolicyHolderNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			throw new PolicyHolderNotFoundException(e.getMessage());
+		}
+	}
+
+	@Override
+	public PolicyHolder getPolicyHolderById(Integer policyHolderId) throws PolicyHolderNotFoundException {
+		try {
+			Optional<PolicyHolder> optional=iPolicyHolderRepository.findById(policyHolderId);
+			if(optional.isPresent()) {
+				return optional.get();
+			}else {
+				throw new Exception("Invalid PolicyHolder Id");
+			}
+		}catch(DataAccessException e) {
+			throw new PolicyHolderNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			throw new PolicyHolderNotFoundException(e.getMessage());
+		}
+	}
+
+	@Override
+	public List<PolicyHolder> getAllPolicyHolders() throws PolicyHolderNotFoundException {
+		try {			
+			return iPolicyHolderRepository.findAll();
+		}catch(DataAccessException e) {
+			throw new PolicyHolderNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			throw new PolicyHolderNotFoundException(e.getMessage());
+		}
+	}
 //
 //	@Override
 //	public List<Transactions> getAllTransactions() throws TransactionNotFoundException {
@@ -196,69 +196,69 @@ public class AdminServiceImpl implements AdminService
 //		}
 //	}
 //
-//	@Override
-//	public Policy addPolicy(Policy policy) throws PolicyNotFoundException {
-//		try {			
-//			return iPolicyRepository.save(policy);
-//		}catch(DataAccessException e) {
-//			
-//			throw new PolicyNotFoundException(e.getMessage());
-//		}catch(Exception e) {
-//			
-//			throw new PolicyNotFoundException(e.getMessage());
-//		}
-//	}
-//
-//	@Override
-//	public Policy updatePolicy(Policy policy) throws PolicyNotFoundException {
-//		try {			
-//			return iPolicyRepository.save(policy);
-//		}catch(DataAccessException e) {
-//			
-//			throw new PolicyNotFoundException(e.getMessage());
-//		}catch(Exception e) {
-//			
-//			throw new PolicyNotFoundException(e.getMessage());
-//		}
-//	}
-//
-//	@Override
-//	public void deletePolicy(Integer policyId) throws PolicyNotFoundException {
-//		try {
-//			iPolicyRepository.deleteById(policyId);
-//		}catch(DataAccessException e) {
-//			throw new PolicyNotFoundException(e.getMessage());
-//		}catch(Exception e) {
-//			throw new PolicyNotFoundException(e.getMessage());
-//		}
-//	}
-//
-//	@Override
-//	public Policy getPolicyById(Integer policyId) throws PolicyNotFoundException {
-//		try {
-//			Optional<Policy> optional= iPolicyRepository.findById(policyId);
-//			if(optional.isPresent()) {
-//				return optional.get();
-//			}else {
-//				throw new PolicyNotFoundException("Invalid Policy Id");
-//			}
-//		}catch(DataAccessException e) {
-//			throw new PolicyNotFoundException(e.getMessage());
-//		}catch(Exception e) {
-//			throw new PolicyNotFoundException(e.getMessage());
-//		}
-//	}
-//
-//	@Override
-//	public List<Policy> getAllPolicies() throws PolicyNotFoundException {
-//		try {
-//			return iPolicyRepository.findAll();
-//		}catch(DataAccessException e) {
-//			throw new PolicyNotFoundException(e.getMessage());
-//		}catch(Exception e) {
-//			throw new PolicyNotFoundException(e.getMessage());
-//		}
-//		}
+	@Override
+	public Policy addPolicy(Policy policy) throws PolicyNotFoundException {
+		try {			
+			return iPolicyRepository.save(policy);
+		}catch(DataAccessException e) {
+			
+			throw new PolicyNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			
+			throw new PolicyNotFoundException(e.getMessage());
+		}
+	}
+
+	@Override
+	public Policy updatePolicy(Policy policy) throws PolicyNotFoundException {
+		try {			
+			return iPolicyRepository.save(policy);
+		}catch(DataAccessException e) {
+			
+			throw new PolicyNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			
+			throw new PolicyNotFoundException(e.getMessage());
+		}
+	}
+
+	@Override
+	public void deletePolicy(Integer policyId) throws PolicyNotFoundException {
+		try {
+			iPolicyRepository.deleteById(policyId);
+		}catch(DataAccessException e) {
+			throw new PolicyNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			throw new PolicyNotFoundException(e.getMessage());
+		}
+	}
+
+	@Override
+	public Policy getPolicyById(Integer policyId) throws PolicyNotFoundException {
+		try {
+			Optional<Policy> optional= iPolicyRepository.findById(policyId);
+			if(optional.isPresent()) {
+				return optional.get();
+			}else {
+				throw new PolicyNotFoundException("Invalid Policy Id");
+			}
+		}catch(DataAccessException e) {
+			throw new PolicyNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			throw new PolicyNotFoundException(e.getMessage());
+		}
+	}
+
+	@Override
+	public List<Policy> getAllPolicies() throws PolicyNotFoundException {
+		try {
+			return iPolicyRepository.findAll();
+		}catch(DataAccessException e) {
+			throw new PolicyNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			throw new PolicyNotFoundException(e.getMessage());
+		}
+		}
 
 	@Override
 	public Admin addAdmin(Admin admin) throws AdminNotFoundException {

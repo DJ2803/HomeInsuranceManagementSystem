@@ -36,57 +36,57 @@ public class AdminController
 	@Autowired
 	private AgentService agentService;
 	
-//	@GetMapping("/admin/policyholders")
-//	public ResponseEntity<List<PolicyHolder>> getAllPolicyHolders(){
-//		try {
-//			List<PolicyHolder> PolicyHolderList = iAdminService.getAllPolicyHolders();
-//			return new ResponseEntity<>(PolicyHolderList, HttpStatus.OK);
-//		}catch(PolicyHolderNotFoundException e) {
-//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-//		}
-//	}
-//	
-//	@PostMapping("/admin/policyholders")
-//	public ResponseEntity<PolicyHolder> addPolicyHolder(@RequestBody PolicyHolder pHolder) {
-//		try {
-//			PolicyHolder policyHolder=iAdminService.addPolicyHolder(pHolder);
-//			return new ResponseEntity<>(policyHolder, HttpStatus.OK);
-//		}catch(PolicyHolderNotFoundException e) {
-//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-//		}
-//	}
-//	
-//	@PutMapping("/admin/policyholders")
-//	public ResponseEntity<PolicyHolder> updatePolicyHolder(@RequestBody PolicyHolder pHolder) {
-//		try {
-//			PolicyHolder policyHolder=iAdminService.updatePolicyHolder(pHolder);
-//			return new ResponseEntity<>(policyHolder, HttpStatus.OK);
-//		}catch(PolicyHolderNotFoundException e) {
-//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-//		}
-//	}
-//	
-//	@GetMapping("/admin/policyholders/{policyHolderId}")
-//	public ResponseEntity<PolicyHolder> getPolicyHolderById(@PathVariable Integer policyHolderId)
-//	{
-//		try {
-//			PolicyHolder policyHolder=iAdminService.getPolicyHolderById(policyHolderId);
-//			return new ResponseEntity<>(policyHolder, HttpStatus.OK);
-//		}catch(PolicyHolderNotFoundException e) {
-//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-//		}
-//	}
-//	
-//	@DeleteMapping("/admin/policyholders/{policyHolderId}")
-//	public ResponseEntity<String> deletePolicyHolder(@PathVariable Integer policyHolderId)
-//	{
-//		try {
-//			iAdminService.deletePolicyHolder(policyHolderId);
-//			return new ResponseEntity<>("PolicyHolder Deleted", HttpStatus.OK);
-//		}catch(PolicyHolderNotFoundException e) {
-//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-//		}
-//	}
+	@GetMapping("/getAllPolicyHolders")
+	public ResponseEntity<List<PolicyHolder>> getAllPolicyHolders(){
+		try {
+			List<PolicyHolder> PolicyHolderList = iAdminService.getAllPolicyHolders();
+			return new ResponseEntity<>(PolicyHolderList, HttpStatus.OK);
+		}catch(PolicyHolderNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
+	
+	@PostMapping("/addPolicyHolder")
+	public ResponseEntity<PolicyHolder> addPolicyHolder(@RequestBody PolicyHolder pHolder) {
+		try {
+			PolicyHolder policyHolder=iAdminService.addPolicyHolder(pHolder);
+			return new ResponseEntity<>(policyHolder, HttpStatus.OK);
+		}catch(PolicyHolderNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
+	
+	@PutMapping("/updatePolicyHolder")
+	public ResponseEntity<PolicyHolder> updatePolicyHolder(@RequestBody PolicyHolder pHolder) {
+		try {
+			PolicyHolder policyHolder=iAdminService.updatePolicyHolder(pHolder);
+			return new ResponseEntity<>(policyHolder, HttpStatus.OK);
+		}catch(PolicyHolderNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
+	
+	@GetMapping("/getPolicyHolderById/{policyHolderId}")
+	public ResponseEntity<PolicyHolder> getPolicyHolderById(@PathVariable Integer policyHolderId)
+	{
+		try {
+			PolicyHolder policyHolder=iAdminService.getPolicyHolderById(policyHolderId);
+			return new ResponseEntity<>(policyHolder, HttpStatus.OK);
+		}catch(PolicyHolderNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
+	
+	@DeleteMapping("/deletePolicyHolder/{policyHolderId}")
+	public ResponseEntity<String> deletePolicyHolder(@PathVariable Integer policyHolderId)
+	{
+		try {
+			iAdminService.deletePolicyHolder(policyHolderId);
+			return new ResponseEntity<>("PolicyHolder Deleted", HttpStatus.OK);
+		}catch(PolicyHolderNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
 //	
 //	@GetMapping("/admin/transactions")
 //	public ResponseEntity<List<Transactions>> getAllTransactions()
@@ -121,58 +121,58 @@ public class AdminController
 //		}
 //	}
 //	
-//	@GetMapping("/admin/policy")
-//	public ResponseEntity<List<Policy>> getAllPolicies()
-//	{
-//		try {
-//			List<Policy> Plist=iAdminService.getAllPolicies();
-//			return new ResponseEntity<>(Plist,HttpStatus.OK);
-//		}catch(PolicyNotFoundException e) {
-//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-//		}
-//	}
-//	
-//	@GetMapping("/admin/policy/{policyId}")
-//	public ResponseEntity<Policy> getPolicyById(@PathVariable Integer policyId)
-//	{
-//		try {
-//			Policy policy=iAdminService.getPolicyById(policyId);
-//			return new ResponseEntity<>(policy,HttpStatus.OK);
-//		}catch(PolicyNotFoundException e) {
-//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-//		}
-//	}
-//	
-//	@PostMapping("/admin/policy")
-//	public ResponseEntity<Policy> addPolicy(@RequestBody Policy policy) {
-//		try {
-//			Policy plcy=iAdminService.addPolicy(policy);
-//			return new ResponseEntity<>(plcy, HttpStatus.OK);
-//		}catch(PolicyNotFoundException e) {
-//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-//		}
-//	}
-//	
-//	@PutMapping("/admin/policy")
-//	public ResponseEntity<Policy> updateEmployee(@RequestBody Policy policy) {
-//		try {
-//			Policy plcy=iAdminService.updatePolicy(policy);
-//			return new ResponseEntity<>(plcy, HttpStatus.OK);
-//		}catch(PolicyNotFoundException e) {
-//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-//		}
-//	}
-//	
-//	@DeleteMapping("/admin/policy/{policyId}")
-//	public ResponseEntity<String> deletePolicy(@PathVariable Integer policyId)
-//	{
-//		try {
-//			iAdminService.deletePolicy(policyId);
-//			return new ResponseEntity<>("Policy Deleted",HttpStatus.OK);
-//		}catch(PolicyNotFoundException e) {
-//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-//		}
-//	}
+	@GetMapping("/getAllPolicies")
+	public ResponseEntity<List<Policy>> getAllPolicies()
+	{
+		try {
+			List<Policy> Plist=iAdminService.getAllPolicies();
+			return new ResponseEntity<>(Plist,HttpStatus.OK);
+		}catch(PolicyNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
+	
+	@GetMapping("/getPolicyById/{policyId}")
+	public ResponseEntity<Policy> getPolicyById(@PathVariable Integer policyId)
+	{
+		try {
+			Policy policy=iAdminService.getPolicyById(policyId);
+			return new ResponseEntity<>(policy,HttpStatus.OK);
+		}catch(PolicyNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
+	
+	@PostMapping("/addPolicy")
+	public ResponseEntity<Policy> addPolicy(@RequestBody Policy policy) {
+		try {
+			Policy plcy=iAdminService.addPolicy(policy);
+			return new ResponseEntity<>(plcy, HttpStatus.OK);
+		}catch(PolicyNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
+	
+	@PutMapping("/updatePolicy")
+	public ResponseEntity<Policy> updatePolicy(@RequestBody Policy policy) {
+		try {
+			Policy plcy=iAdminService.updatePolicy(policy);
+			return new ResponseEntity<>(plcy, HttpStatus.OK);
+		}catch(PolicyNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
+	
+	@DeleteMapping("/deletePolicy/{policyId}")
+	public ResponseEntity<String> deletePolicy(@PathVariable Integer policyId)
+	{
+		try {
+			iAdminService.deletePolicy(policyId);
+			return new ResponseEntity<>("Policy Deleted",HttpStatus.OK);
+		}catch(PolicyNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
 	
 	@GetMapping("/getAll")
 	public ResponseEntity<List<Admin>> getAllAdmins()
