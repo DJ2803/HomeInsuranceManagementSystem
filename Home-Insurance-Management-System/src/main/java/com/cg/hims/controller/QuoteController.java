@@ -15,74 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.cg.hims.entities.Agent;
 import com.cg.hims.entities.Quote;
-import com.cg.hims.exceptions.AgentException;
-import com.cg.hims.exceptions.AgentNotFoundException;
-import com.cg.hims.service.AgentService;
 import com.cg.hims.service.QuoteService;
 
-
-
-
 @RestController
-@RequestMapping("/agent")
-public class AgentController {
-	@Autowired
-	private AgentService agentService;
+@RequestMapping("quote")
+public class QuoteController {
+
 	@Autowired
 	private QuoteService qs;
-
-	@PostMapping("/addAgent")
-	public ResponseEntity<Agent> addAgent(@RequestBody Agent agent) {
-		try {
-			Agent agt= agentService.addAgent(agent);
-			return new ResponseEntity<>(agt, HttpStatus.OK);
-		}catch(AgentException e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-		}
-	}
-
-	@PutMapping("/updateAgent")
-	public ResponseEntity<Agent> updateAgent(@RequestBody Agent agent) {
-		try {
-			Agent agt= agentService.updateAgent(agent);
-			return new ResponseEntity<>(agt, HttpStatus.OK);
-		}catch(AgentNotFoundException e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-		}
-	}
-
-	@DeleteMapping("/removeAgent/{agtId}")
-	public ResponseEntity<String> removeAgent(@PathVariable Integer agtId) {
-		try {
-			agentService.removeAgent(agtId);
-			return new ResponseEntity<>("Employee deleted", HttpStatus.OK);
-		}catch(AgentNotFoundException e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-		}
-	}
-
-	@GetMapping("/findAgentById/{agtId}")
-	public ResponseEntity<Agent> findAgentById(@PathVariable Integer agtId){
-		try {
-			Agent agent = agentService.findAgentById(agtId);
-			return new ResponseEntity<>(agent, HttpStatus.OK);
-		}catch(AgentNotFoundException e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-		}
-
-	}
-
-	@GetMapping("/viewAllAgents")
-	public ResponseEntity<List<Agent>> viewAllAgents(){
-		try {
-			List<Agent> agentList = agentService.viewAllAgents();
-			return new ResponseEntity<>(agentList, HttpStatus.OK);
-		}catch(AgentException e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-		}
-	}
 	
 	@PostMapping("/addQuote")
 	public ResponseEntity<Quote> addQuote(@RequestBody Quote quote) {
@@ -122,7 +63,7 @@ public class AgentController {
 		}
 
 	}
-	@DeleteMapping("/deleteQuote/{quote_id}")
+	@DeleteMapping("/removeQuote/{quote_id}")
 	public ResponseEntity<String> removeQuote(@PathVariable Integer quote_id) {
 		try {
 			qs.removeQuote(quote_id);
@@ -131,5 +72,4 @@ public class AgentController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-
 }

@@ -12,12 +12,12 @@ import com.cg.hims.entities.Agent;
 import com.cg.hims.entities.Property;
 import com.cg.hims.exceptions.AgentException;
 import com.cg.hims.exceptions.AgentNotFoundException;
-import com.cg.hims.repository.IPropertyRepository;
+import com.cg.hims.repository.PropertyRepository;
 @Service
 @Transactional
-public class IPropertyServiceImpl implements IPropertyService{
+public class PropertyServiceImpl implements PropertyService{
 	@Autowired
-	private IPropertyRepository holderProperty;
+	private PropertyRepository holderProperty;
 	public Property addProperty(Property property) throws Exception
 	{	
 		try {			
@@ -72,3 +72,4 @@ public class IPropertyServiceImpl implements IPropertyService{
 		}
 	}
 }
+

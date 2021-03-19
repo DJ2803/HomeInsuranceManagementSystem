@@ -12,15 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cg.hims.entities.Agent;
 import com.cg.hims.exceptions.AgentException;
 import com.cg.hims.exceptions.AgentNotFoundException;
-import com.cg.hims.repository.IAgentRepository;
+import com.cg.hims.repository.AgentRepository;
 
 
 
 @Service
 @Transactional
-public class IAgentServiceImpl implements IAgentService{
+public class AgentServiceImpl implements AgentService{
 	@Autowired
-	private IAgentRepository agentRepository;
+	private AgentRepository agentRepository;
 	
 	@Override
 	public Agent addAgent(Agent agent) throws AgentException

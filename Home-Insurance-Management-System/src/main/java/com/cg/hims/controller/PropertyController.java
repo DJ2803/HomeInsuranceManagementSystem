@@ -18,14 +18,14 @@ import com.cg.hims.entities.Agent;
 import com.cg.hims.entities.Property;
 import com.cg.hims.exceptions.AgentException;
 import com.cg.hims.exceptions.AgentNotFoundException;
-import com.cg.hims.service.IPropertyService;
+import com.cg.hims.service.PropertyService;
 
 @RestController
 @RequestMapping("/property")
 public class PropertyController {
 
 	@Autowired
-	private IPropertyService propertyService;
+	private PropertyService propertyService;
 	private Property ppt;
 	@PostMapping("/addProperty")
 	public ResponseEntity<Property> addProperty(@RequestBody Property property) {
@@ -69,3 +69,4 @@ public class PropertyController {
 		}
 	}
 }
+

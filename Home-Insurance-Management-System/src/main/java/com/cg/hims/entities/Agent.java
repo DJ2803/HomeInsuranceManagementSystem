@@ -1,12 +1,16 @@
 package com.cg.hims.entities;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -35,7 +39,12 @@ public class Agent {
 //	private String email;
 //	private String mobileNo;
 	
-	//@OneToMany(mappedBy="agent")
+	@ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+	private Admin admin;
+	@OneToMany(mappedBy = "agent")
+	private Set<Quote> quotes;
+	@OneToMany(mappedBy = "agent")
+	private Set<PolicyHolder> holder;
 	
 //	private List<PolicyHolder> policyHoldersList;
 //	private List<Quote> quoteList;

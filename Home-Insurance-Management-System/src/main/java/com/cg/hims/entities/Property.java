@@ -25,6 +25,7 @@ public class Property {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	private int propertyId;
 	private int marketValue;
 	private int yearBuilt;
@@ -39,3 +40,5 @@ public class Property {
 	
 	
 }
+
+
