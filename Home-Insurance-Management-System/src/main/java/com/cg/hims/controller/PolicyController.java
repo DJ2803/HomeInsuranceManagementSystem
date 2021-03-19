@@ -3,60 +3,71 @@ package com.cg.hims.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.cg.hims.entities.Policy;
 import com.cg.hims.exceptions.PolicyNotFoundException;
-import com.cg.hims.service.IPolicyService;
+import com.cg.hims.service.PolicyServiceImpl;
 
 @RestController
+@RequestMapping("/policy")
 public class PolicyController {
 	@Autowired
-	private IPolicyService iPolicyService;
-	@RequestMapping("/policies")
-	public List<Policy> showAllPolicies(){
-		return iPolicyService.showAllPolicies();
+	private PolicyServiceImpl policyServiceImpl;
+
+	@GetMapping("/showAll")
+	public ResponseEntity<List<Policy>> showAllPolicies() throws PolicyNotFoundException{
+		List<Policy> policyList = policyServiceImpl.showAllPolicies();
+		return new ResponseEntity<>(policyList, HttpStatus.OK);
+		
 	}
-	
-	@GetMapping("/policies/{id}")
-	public Policy findPolicyById(@PathVariable Integer policyId) {
+
+	@GetMapping("/showById/{policyId}")
+	public ResponseEntity<Policy> findPolicyById(@PathVariable Integer policyId) {
 		try {
-			Policy policy = iPolicyService.findPolicyById(policyId);
-			return policy;
-		} catch (PolicyNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			
+			Policy policy = policyServiceImpl.findPolicyById(policyId);
+			return new ResponseEntity<>(policy, HttpStatus.OK);
+		}catch(PolicyNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
 		}
 	}
-	@RequestMapping(method = RequestMethod.POST, value = "/polices/{id}")
-	public void addPolicy(@RequestBody Policy policy) {
-		iPolicyService.addPolicy(policy);
+
+	@PostMapping("/addpolicy")
+	public ResponseEntity<Policy> addPolicy(@RequestBody Policy policy) throws PolicyNotFoundException {
+		Policy policy1 = policyServiceImpl.addPolicy(policy);
+		return new ResponseEntity<>(policy1, HttpStatus.OK);
+		
 	}
-	
-	@RequestMapping(method = RequestMethod.PUT, value = "/polices/{id}")
-	public void updatePolicy(@RequestBody Policy policy, @PathVariable Integer policyId) {
+
+	@PutMapping("/updatepolicy/{policyId}")
+	public ResponseEntity<Policy> updatePolicy(@RequestBody Policy policy, @PathVariable Integer policyId) {
 		try {
-			iPolicyService.updatePolicy(policy);
+			Policy policy1 = policyServiceImpl.updatePolicy(policy);
+			return new ResponseEntity<>(policy1, HttpStatus.OK);
 		} catch (PolicyNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
 		}
 	}
-	
-	@RequestMapping(method = RequestMethod.DELETE, value = "/polices/{id}")
-	public void removePolicy(@PathVariable Integer policyId) {
+
+	@DeleteMapping("/deletepolicy/{policyId}")
+	public ResponseEntity<String> removePolicy(@PathVariable Integer policyId) {
 		try {
-			iPolicyService.removePolicy(policyId);
+			policyServiceImpl.removePolicy(policyId);
+			return new ResponseEntity<>("Policy deleted", HttpStatus.OK);
 		} catch (PolicyNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
 
