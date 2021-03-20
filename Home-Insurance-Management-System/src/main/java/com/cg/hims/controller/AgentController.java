@@ -35,17 +35,17 @@ public class AgentController {
 	@Autowired
 	private QuoteService qs;
 
-	@PostMapping("/addAgent")
-	public ResponseEntity<Agent> addAgent(@RequestBody Agent agent) {
-		try {
-			Agent agt= agentService.addAgent(agent);
-			return new ResponseEntity<>(agt, HttpStatus.OK);
-		}catch(AgentException e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-		}
-	}
+//	@PostMapping("/addagent")
+//	public ResponseEntity<Agent> addAgent(@RequestBody Agent agent) {
+//		try {
+//			Agent agt= agentService.addAgent(agent);
+//			return new ResponseEntity<>(agt, HttpStatus.OK);
+//		}catch(AgentException e) {
+//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+//		}
+//	}
 
-	@PutMapping("/updateAgent")
+	@PutMapping("/update")
 	public ResponseEntity<Agent> updateAgent(@RequestBody Agent agent) {
 		try {
 			Agent agt= agentService.updateAgent(agent);
@@ -55,17 +55,17 @@ public class AgentController {
 		}
 	}
 
-	@DeleteMapping("/removeAgent/{agtId}")
-	public ResponseEntity<String> removeAgent(@PathVariable Integer agtId) {
-		try {
-			agentService.removeAgent(agtId);
-			return new ResponseEntity<>("Employee deleted", HttpStatus.OK);
-		}catch(AgentNotFoundException e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-		}
-	}
+//	@DeleteMapping("/remove/{agtId}")
+//	public ResponseEntity<String> removeAgent(@PathVariable Integer agtId) {
+//		try {
+//			agentService.removeAgent(agtId);
+//			return new ResponseEntity<>("Employee deleted", HttpStatus.OK);
+//		}catch(AgentNotFoundException e) {
+//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+//		}
+//	}
 
-	@GetMapping("/findAgentById/{agtId}")
+	@GetMapping("/findagentbyid/{agtId}")
 	public ResponseEntity<Agent> findAgentById(@PathVariable Integer agtId){
 		try {
 			Agent agent = agentService.findAgentById(agtId);
@@ -76,17 +76,17 @@ public class AgentController {
 
 	}
 
-	@GetMapping("/viewAllAgents")
-	public ResponseEntity<List<Agent>> viewAllAgents(){
-		try {
-			List<Agent> agentList = agentService.viewAllAgents();
-			return new ResponseEntity<>(agentList, HttpStatus.OK);
-		}catch(AgentException e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-		} 
-	}
+//	@GetMapping("/viewAllAgents")
+//	public ResponseEntity<List<Agent>> viewAllAgents(){
+//		try {
+//			List<Agent> agentList = agentService.viewAllAgents();
+//			return new ResponseEntity<>(agentList, HttpStatus.OK);
+//		}catch(AgentException e) {
+//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+//		} 
+//	}
 	
-	@PostMapping("/addQuote")
+	@PostMapping("/addquote")
 	public ResponseEntity<Quote> addQuote(@RequestBody Quote quote) {
 		try {
 			Quote qu= qs.addQuote(quote);
@@ -95,7 +95,7 @@ public class AgentController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	@PutMapping("/updateQuote")
+	@PutMapping("/updatequote")
 	public ResponseEntity<Quote> updateQuote(@RequestBody Quote quote) {
 		try {
 			Quote qu= qs.updateQuote(quote);
@@ -104,7 +104,7 @@ public class AgentController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	@GetMapping("/showAllQuotes")
+	@GetMapping("/showallquotes")
 	public ResponseEntity<List<Quote>> showAllQuotes() {
 		try {
 			List<Quote> quoteList = qs.showAllQuotes();
@@ -114,7 +114,7 @@ public class AgentController {
 		}
 
 	}
-	@GetMapping("/findQuoteById/{quote_id}")
+	@GetMapping("/findquotebyid/{quote_id}")
 	public ResponseEntity<Quote> findQuoteById(@PathVariable Integer quote_id){
 		try {
 			Quote qu = qs.findQuoteById(quote_id);
@@ -124,7 +124,7 @@ public class AgentController {
 		}
 
 	}
-	@DeleteMapping("/deleteQuote/{quote_id}")
+	@DeleteMapping("/deletequote/{quote_id}")
 	public ResponseEntity<String> removeQuote(@PathVariable Integer quote_id) {
 		try {
 			qs.removeQuote(quote_id);
@@ -133,7 +133,7 @@ public class AgentController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	@GetMapping("/getAllPolicyHolders")
+	@GetMapping("/getallpolicyholders")
 	public ResponseEntity<List<PolicyHolder>> getAllPolicyHolders(){
 		try {
 			List<PolicyHolder> PolicyHolderList = agentService.getAllPolicyHolders();
@@ -143,7 +143,7 @@ public class AgentController {
 		}
 	}
 	
-	@PostMapping("/addPolicyHolder")
+	@PostMapping("/addpolicyholder")
 	public ResponseEntity<PolicyHolder> addPolicyHolder(@RequestBody PolicyHolder pHolder) {
 		try {
 			PolicyHolder policyHolder=agentService.addPolicyHolder(pHolder);
@@ -153,7 +153,7 @@ public class AgentController {
 		}
 	}
 	
-	@PutMapping("/updatePolicyHolder")
+	@PutMapping("/updatepolicyholder")
 	public ResponseEntity<PolicyHolder> updatePolicyHolder(@RequestBody PolicyHolder pHolder) {
 		try {
 			PolicyHolder policyHolder=agentService.updatePolicyHolder(pHolder);
@@ -163,7 +163,7 @@ public class AgentController {
 		}
 	}
 	
-	@GetMapping("/getPolicyHolderById/{policyHolderId}")
+	@GetMapping("/getpolicyholderbyid/{policyHolderId}")
 	public ResponseEntity<PolicyHolder> getPolicyHolderById(@PathVariable Integer policyHolderId)
 	{
 		try {
@@ -174,7 +174,7 @@ public class AgentController {
 		}
 	}
 	
-	@DeleteMapping("/deletePolicyHolder/{policyHolderId}")
+	@DeleteMapping("/deletepolicyholder/{policyHolderId}")
 	public ResponseEntity<String> deletePolicyHolder(@PathVariable Integer policyHolderId)
 	{
 		try {
