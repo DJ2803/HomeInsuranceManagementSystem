@@ -25,15 +25,15 @@ public class Transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer transactionId;
-	private LocalTime time;
+	private LocalTime transactionTime;
 	private String region;
-	private String payment;
+	private String paymentType;
 	
-	public Transaction(LocalTime time, String region, String payment) {
+	public Transaction(LocalTime transactionTime, String region, String paymenttype) {
 		super();
-		this.time = time;
+		this.transactionTime = transactionTime;
 		this.region = region;
-		this.payment = payment;
+		this.paymentType = paymentType;
 	}
 	
 	
