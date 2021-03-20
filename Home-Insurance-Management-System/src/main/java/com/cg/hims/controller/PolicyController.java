@@ -25,14 +25,14 @@ public class PolicyController {
 	@Autowired
 	private PolicyServiceImpl policyServiceImpl;
 
-	@GetMapping("/showAll")
+	@GetMapping("/showall")
 	public ResponseEntity<List<Policy>> showAllPolicies() throws PolicyNotFoundException{
 		List<Policy> policyList = policyServiceImpl.showAllPolicies();
 		return new ResponseEntity<>(policyList, HttpStatus.OK);
 		
 	}
 
-	@GetMapping("/showById/{policyId}")
+	@GetMapping("/showbyid/{policyId}")
 	public ResponseEntity<Policy> findPolicyById(@PathVariable Integer policyId) {
 		try {
 			Policy policy = policyServiceImpl.findPolicyById(policyId);
