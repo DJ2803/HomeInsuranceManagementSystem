@@ -25,7 +25,7 @@ public class QuoteController {
 	@Autowired
 	private QuoteService qs;
 	
-	@PostMapping("/addQuote")
+	@PostMapping("/addquote")
 	public ResponseEntity<Quote> addQuote(@RequestBody Quote quote) {
 		try {
 			Quote qu= qs.addQuote(quote);
@@ -34,7 +34,7 @@ public class QuoteController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	@PutMapping("/updateQuote")
+	@PutMapping("/updatequote")
 	public ResponseEntity<Quote> updateQuote(@RequestBody Quote quote) {
 		try {
 			Quote qu= qs.updateQuote(quote);
@@ -43,7 +43,7 @@ public class QuoteController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	@GetMapping("/showAllQuotes")
+	@GetMapping("/showallquotes")
 	public ResponseEntity<List<Quote>> showAllQuotes() {
 		try {
 			List<Quote> quoteList = qs.showAllQuotes();
@@ -53,7 +53,7 @@ public class QuoteController {
 		}
 
 	}
-	@GetMapping("/findQuoteById/{quote_id}")
+	@GetMapping("/findquotebyid/{quote_id}")
 	public ResponseEntity<Quote> findQuoteById(@PathVariable Integer quote_id){
 		try {
 			Quote qu = qs.findQuoteById(quote_id);
@@ -63,7 +63,7 @@ public class QuoteController {
 		}
 
 	}
-	@DeleteMapping("/removeQuote/{quote_id}")
+	@DeleteMapping("/removequote/{quote_id}")
 	public ResponseEntity<String> removeQuote(@PathVariable Integer quote_id) {
 		try {
 			qs.removeQuote(quote_id);

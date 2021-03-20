@@ -36,7 +36,7 @@ public class AdminController
 	@Autowired
 	private AgentService agentService;
 	
-	@GetMapping("/getAllPolicyHolders")
+	@GetMapping("/getallpolicyholders")
 	public ResponseEntity<List<PolicyHolder>> getAllPolicyHolders(){
 		try {
 			List<PolicyHolder> PolicyHolderList = iAdminService.getAllPolicyHolders();
@@ -46,7 +46,7 @@ public class AdminController
 		}
 	}
 	
-	@PostMapping("/addPolicyHolder")
+	@PostMapping("/addpolicyholder")
 	public ResponseEntity<PolicyHolder> addPolicyHolder(@RequestBody PolicyHolder pHolder) {
 		try {
 			PolicyHolder policyHolder=iAdminService.addPolicyHolder(pHolder);
@@ -56,7 +56,7 @@ public class AdminController
 		}
 	}
 	
-	@PutMapping("/updatePolicyHolder")
+	@PutMapping("/updatepolicyholder")
 	public ResponseEntity<PolicyHolder> updatePolicyHolder(@RequestBody PolicyHolder pHolder) {
 		try {
 			PolicyHolder policyHolder=iAdminService.updatePolicyHolder(pHolder);
@@ -66,7 +66,7 @@ public class AdminController
 		}
 	}
 	
-	@GetMapping("/getPolicyHolderById/{policyHolderId}")
+	@GetMapping("/getpolicyholderbyid/{policyHolderId}")
 	public ResponseEntity<PolicyHolder> getPolicyHolderById(@PathVariable Integer policyHolderId)
 	{
 		try {
@@ -77,7 +77,7 @@ public class AdminController
 		}
 	}
 	
-	@DeleteMapping("/deletePolicyHolder/{policyHolderId}")
+	@DeleteMapping("/deletepolicyholder/{policyHolderId}")
 	public ResponseEntity<String> deletePolicyHolder(@PathVariable Integer policyHolderId)
 	{
 		try {
@@ -121,7 +121,7 @@ public class AdminController
 //		}
 //	}
 //	
-	@GetMapping("/getAllPolicies")
+	@GetMapping("/getallpolicies")
 	public ResponseEntity<List<Policy>> getAllPolicies()
 	{
 		try {
@@ -132,7 +132,7 @@ public class AdminController
 		}
 	}
 	
-	@GetMapping("/getPolicyById/{policyId}")
+	@GetMapping("/getpolicybyid/{policyId}")
 	public ResponseEntity<Policy> getPolicyById(@PathVariable Integer policyId)
 	{
 		try {
@@ -143,7 +143,7 @@ public class AdminController
 		}
 	}
 	
-	@PostMapping("/addPolicy")
+	@PostMapping("/addpolicy")
 	public ResponseEntity<Policy> addPolicy(@RequestBody Policy policy) {
 		try {
 			Policy plcy=iAdminService.addPolicy(policy);
@@ -153,7 +153,7 @@ public class AdminController
 		}
 	}
 	
-	@PutMapping("/updatePolicy")
+	@PutMapping("/updatepolicy")
 	public ResponseEntity<Policy> updatePolicy(@RequestBody Policy policy) {
 		try {
 			Policy plcy=iAdminService.updatePolicy(policy);
@@ -163,7 +163,7 @@ public class AdminController
 		}
 	}
 	
-	@DeleteMapping("/deletePolicy/{policyId}")
+	@DeleteMapping("/deletepolicy/{policyId}")
 	public ResponseEntity<String> deletePolicy(@PathVariable Integer policyId)
 	{
 		try {
@@ -174,7 +174,7 @@ public class AdminController
 		}
 	}
 	
-	@GetMapping("/getAll")
+	@GetMapping("/getall")
 	public ResponseEntity<List<Admin>> getAllAdmins()
 	{
 		try {
@@ -185,7 +185,7 @@ public class AdminController
 		}
 	}
 	
-	@GetMapping("/getById/{adminId}")
+	@GetMapping("/getbyid/{adminId}")
 	public ResponseEntity<Admin> getAdminById(@PathVariable Integer adminId)
 	{
 		try {
@@ -227,7 +227,7 @@ public class AdminController
 		}
 	}
 	
-	@PostMapping("/addAgent")
+	@PostMapping("/addagent")
 	public ResponseEntity<Agent> addAgent(@RequestBody Agent agent) {
 		try {
 			Agent agt= agentService.addAgent(agent);
@@ -237,7 +237,7 @@ public class AdminController
 		}
 	}
 
-	@PutMapping("/updateAgent")
+	@PutMapping("/updateagent")
 	public ResponseEntity<Agent> updateAgent(@RequestBody Agent agent) {
 		try {
 			Agent agt= agentService.updateAgent(agent);
@@ -247,7 +247,7 @@ public class AdminController
 		}
 	}
 
-	@DeleteMapping("/removeAgent/{agtId}")
+	@DeleteMapping("/removeagent/{agtId}")
 	public ResponseEntity<String> removeAgent(@PathVariable Integer agtId) {
 		try {
 			agentService.removeAgent(agtId);
@@ -257,7 +257,7 @@ public class AdminController
 		}
 	}
 
-	@GetMapping("/findAgentById/{agtId}")
+	@GetMapping("/findagentbyid/{agtId}")
 	public ResponseEntity<Agent> findAgentById(@PathVariable Integer agtId){
 		try {
 			Agent agent = agentService.findAgentById(agtId);
@@ -268,7 +268,7 @@ public class AdminController
 
 	}
 
-	@GetMapping("/viewAllAgents")
+	@GetMapping("/viewallagents")
 	public ResponseEntity<List<Agent>> viewAllAgents(){
 		try {
 			List<Agent> agentList = agentService.viewAllAgents();

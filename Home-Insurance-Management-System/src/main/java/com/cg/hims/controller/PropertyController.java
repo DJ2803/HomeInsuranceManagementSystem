@@ -27,7 +27,7 @@ public class PropertyController {
 	@Autowired
 	private PropertyService propertyService;
 	private Property ppt;
-	@PostMapping("/addProperty")
+	@PostMapping("/addproperty")
 	public ResponseEntity<Property> addProperty(@RequestBody Property property) {
 		try {
 			 ppt= propertyService.addProperty(property);
@@ -37,7 +37,7 @@ public class PropertyController {
 		}
 	}
 	
-	@PutMapping("/updateProperty")
+	@PutMapping("/updateproperty")
 	public ResponseEntity<Property> updateProperty(@RequestBody Property property) {
 		try {
 			 ppt= propertyService.updateProperty(property);
@@ -47,7 +47,7 @@ public class PropertyController {
 		}
 	}
 	
-	@GetMapping("/findPropertyById/{propertyId}")
+	@GetMapping("/findpropertybyid/{propertyId}")
 	public ResponseEntity<Property> findPropertyById(@PathVariable Integer propertyId){
 		try {
 			 ppt = propertyService.findPropertyById(propertyId);
@@ -58,7 +58,7 @@ public class PropertyController {
 
 	}
 	
-	@GetMapping("/viewProperty")
+	@GetMapping("/viewproperty")
 	public ResponseEntity<Property> viewProperty(){
 		try {
 			
