@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.cg.hims.entities.Agent;
+import com.cg.hims.entities.PolicyHolder;
 import com.cg.hims.entities.Quote;
 import com.cg.hims.exceptions.AgentException;
 import com.cg.hims.exceptions.AgentNotFoundException;
+import com.cg.hims.exceptions.PolicyHolderNotFoundException;
 import com.cg.hims.service.AgentService;
 import com.cg.hims.service.QuoteService;
 
@@ -81,7 +83,7 @@ public class AgentController {
 			return new ResponseEntity<>(agentList, HttpStatus.OK);
 		}catch(AgentException e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-		}
+		} 
 	}
 	
 	@PostMapping("/addQuote")
@@ -128,6 +130,57 @@ public class AgentController {
 			qs.removeQuote(quote_id);
 			return new ResponseEntity<>("Quote deleted", HttpStatus.OK);
 		}catch(Exception e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
+	@GetMapping("/getAllPolicyHolders")
+	public ResponseEntity<List<PolicyHolder>> getAllPolicyHolders(){
+		try {
+			List<PolicyHolder> PolicyHolderList = agentService.getAllPolicyHolders();
+			return new ResponseEntity<>(PolicyHolderList, HttpStatus.OK);
+		}catch(PolicyHolderNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
+	
+	@PostMapping("/addPolicyHolder")
+	public ResponseEntity<PolicyHolder> addPolicyHolder(@RequestBody PolicyHolder pHolder) {
+		try {
+			PolicyHolder policyHolder=agentService.addPolicyHolder(pHolder);
+			return new ResponseEntity<>(policyHolder, HttpStatus.OK);
+		}catch(PolicyHolderNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
+	
+	@PutMapping("/updatePolicyHolder")
+	public ResponseEntity<PolicyHolder> updatePolicyHolder(@RequestBody PolicyHolder pHolder) {
+		try {
+			PolicyHolder policyHolder=agentService.updatePolicyHolder(pHolder);
+			return new ResponseEntity<>(policyHolder, HttpStatus.OK);
+		}catch(PolicyHolderNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
+	
+	@GetMapping("/getPolicyHolderById/{policyHolderId}")
+	public ResponseEntity<PolicyHolder> getPolicyHolderById(@PathVariable Integer policyHolderId)
+	{
+		try {
+			PolicyHolder policyHolder=agentService.getPolicyHolderById(policyHolderId);
+			return new ResponseEntity<>(policyHolder, HttpStatus.OK);
+		}catch(PolicyHolderNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+		}
+	}
+	
+	@DeleteMapping("/deletePolicyHolder/{policyHolderId}")
+	public ResponseEntity<String> deletePolicyHolder(@PathVariable Integer policyHolderId)
+	{
+		try {
+			agentService.deletePolicyHolder(policyHolderId);
+			return new ResponseEntity<>("PolicyHolder Deleted", HttpStatus.OK);
+		}catch(PolicyHolderNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
