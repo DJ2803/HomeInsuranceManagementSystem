@@ -26,7 +26,9 @@ public interface PolicyHolderService {
 	
 	public Quote updateQuote(Quote quote) throws QuoteNotFoundException;
 	
-//	public Property addProperty(Property property) throws Exception;
+	public Property addProperty(Property property) throws Exception;
+	
+	public Property updateProperty(Property property) throws Exception;
 
 	public void removePolicyHolder(int id) throws PolicyHolderNotFoundException;
 //

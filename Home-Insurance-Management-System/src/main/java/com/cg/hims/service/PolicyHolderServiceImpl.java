@@ -146,15 +146,30 @@ public class PolicyHolderServiceImpl implements PolicyHolderService {
 
 
 	
-//	public Property addProperty(Property property) throws Exception
-//	{	
-//		try {			
-//			return holderProperty.save(property);
-//		}catch(DataAccessException e) {
-//			//converting SQLException to EmployeeException
-//			throw new Exception(e.getMessage());
-//		}
-//	}
+	public Property addProperty(Property property) throws Exception
+	{	
+		try {			
+			return holderProperty.save(property);
+		}catch(DataAccessException e) {
+			//converting SQLException to EmployeeException
+			throw new Exception(e.getMessage());
+		}
+	}
+	@Override
+	public Property updateProperty(Property property) throws Exception
+	{
+		try {
+			Optional<Property> optional= holderProperty.findById(property.getPropertyId());
+			if(optional.isPresent()){
+			return holderProperty.save(property);}
+			else{
+				throw new Exception("Property does not exist");
+			}
+		}catch(Exception e) {
+			//converting SQLException to EmployeeException
+			throw new Exception(e.getMessage());
+		}
+		}
 
 //	@Override
 //	public List<PolicyHolder> showAllPolicyHolders() throws PolicyHolderNotFoundException{

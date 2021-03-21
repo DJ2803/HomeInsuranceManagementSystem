@@ -51,6 +51,9 @@ public class PolicyHolder {
 	@JsonIgnore
 	@JoinColumn(name="agent_id")
 	private Agent agent;
+	@OneToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	private User user;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Admin admin;
@@ -65,6 +68,11 @@ public class PolicyHolder {
 	@OneToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name="policy_id")
 	private Policy policy;
-	
+	public PolicyHolder(int policyHolderId, String policy_Holder_Name, User user) {
+		super();
+		this.policyHolderId = policyHolderId;
+		this.policy_Holder_Name = policy_Holder_Name;
+		this.user = user;
+	}
 	
 }

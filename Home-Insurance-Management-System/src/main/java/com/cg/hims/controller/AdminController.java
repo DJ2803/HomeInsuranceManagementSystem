@@ -17,6 +17,8 @@ import com.cg.hims.entities.Admin;
 import com.cg.hims.entities.Agent;
 import com.cg.hims.entities.Policy;
 import com.cg.hims.entities.PolicyHolder;
+import com.cg.hims.entities.Property;
+import com.cg.hims.entities.Quote;
 import com.cg.hims.entities.Transactions;
 import com.cg.hims.exceptions.AdminNotFoundException;
 import com.cg.hims.exceptions.AgentException;
@@ -27,15 +29,22 @@ import com.cg.hims.exceptions.TransactionNotFoundException;
 import com.cg.hims.service.AdminService;
 import com.cg.hims.service.AgentService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+@Api
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/hims")
 public class AdminController 
 {
 	@Autowired
 	private AdminService iAdminService;
 	
-	
-	@GetMapping("/getallpolicyholders")
+	@ApiOperation(value = "Get PolicyHolders",
+			response = PolicyHolder.class,
+			
+			tags = "get-all PolicyHolders",			
+			httpMethod = "GET")
+	@GetMapping("/admin/getallpolicyholders")
 	public ResponseEntity<List<PolicyHolder>> getAllPolicyHolders(){
 		try {
 			List<PolicyHolder> PolicyHolderList = iAdminService.getAllPolicyHolders();
@@ -44,18 +53,26 @@ public class AdminController
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	
-	@PostMapping("/addpolicyholder")
-	public ResponseEntity<PolicyHolder> addPolicyHolder(@RequestBody PolicyHolder pHolder) {
-		try {
-			PolicyHolder policyHolder=iAdminService.addPolicyHolder(pHolder);
-			return new ResponseEntity<>(policyHolder, HttpStatus.OK);
-		}catch(PolicyHolderNotFoundException e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-		}
-	}
-	
-	@PutMapping("/updatepolicyholder")
+//	@ApiOperation(value = "Add PolicyHolder",
+//			response = PolicyHolder.class,
+//			consumes = "PolicyHolder Object",
+//			tags = "post-policyHolder record",
+//			httpMethod = "POST")
+//	@PostMapping("/admin/addpolicyholder")
+//	public ResponseEntity<PolicyHolder> addPolicyHolder(@RequestBody PolicyHolder pHolder) {
+//		try {
+//			PolicyHolder policyHolder=iAdminService.addPolicyHolder(pHolder);
+//			return new ResponseEntity<>(policyHolder, HttpStatus.OK);
+//		}catch(PolicyHolderNotFoundException e) {
+//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+//		}
+//	}
+	@ApiOperation(value = "Update PolicyHolder",
+			response = PolicyHolder.class,
+			consumes = "PolicyHolder Object",
+			tags = "update-policyHolder record-by admin",
+			httpMethod = "PUT")
+	@PutMapping("/admin/updatepolicyholder")
 	public ResponseEntity<PolicyHolder> updatePolicyHolder(@RequestBody PolicyHolder pHolder) {
 		try {
 			PolicyHolder policyHolder=iAdminService.updatePolicyHolder(pHolder);
@@ -64,8 +81,12 @@ public class AdminController
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		} 
 	}
-	
-	@GetMapping("/getpolicyholderbyid/{policyHolderId}")
+	@ApiOperation(value = "Get PolicyHolder",
+			response = PolicyHolder.class,
+			consumes = "policyHolderId",
+			tags = "get-policyHolder by Id",			
+			httpMethod = "GET")
+	@GetMapping("/admin/getpolicyholderbyid/{policyHolderId}")
 	public ResponseEntity<PolicyHolder> getPolicyHolderById(@PathVariable Integer policyHolderId)
 	{
 		try {
@@ -75,8 +96,12 @@ public class AdminController
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	
-	@DeleteMapping("/deletepolicyholder/{policyHolderId}")
+	@ApiOperation(value = "Delete PolicyHolder",
+			response = String.class,
+			consumes = "policyHolderId",
+			tags = "delete-policyHolder record",
+			httpMethod = "DELETE")
+	@DeleteMapping("/admin/deletepolicyholder/{policyHolderId}")
 	public ResponseEntity<String> deletePolicyHolder(@PathVariable Integer policyHolderId)
 	{
 		try {
@@ -120,7 +145,12 @@ public class AdminController
 //		}
 //	}
 //	
-	@GetMapping("/getallpolicies")
+	@ApiOperation(value = "Get Policies",
+			response = Policy.class,
+		
+			tags = "get-all policies",			
+			httpMethod = "GET")
+	@GetMapping("/admin/getallpolicies")
 	public ResponseEntity<List<Policy>> getAllPolicies()
 	{
 		try {
@@ -130,8 +160,12 @@ public class AdminController
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	
-	@GetMapping("/getpolicybyid/{policyId}")
+	@ApiOperation(value = "Get Policy",
+			response = Policy.class,
+			consumes = "policyId",
+			tags = "get-policy by Id",			
+			httpMethod = "GET")
+	@GetMapping("/admin/getpolicybyid/{policyId}")
 	public ResponseEntity<Policy> getPolicyById(@PathVariable Integer policyId)
 	{
 		try {
@@ -141,8 +175,12 @@ public class AdminController
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	
-	@PostMapping("/addpolicy")
+	@ApiOperation(value = "Add Policy",
+			response = Policy.class,
+			consumes = "Policy Object",
+			tags = "post-policy record",
+			httpMethod = "POST")
+	@PostMapping("/admin/addpolicy")
 	public ResponseEntity<Policy> addPolicy(@RequestBody Policy policy) {
 		try {
 			Policy plcy=iAdminService.addPolicy(policy);
@@ -151,8 +189,12 @@ public class AdminController
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	
-	@PutMapping("/updatepolicy")
+	@ApiOperation(value = "Update Policy",
+			response = Policy.class,
+			consumes = "Policy Object",
+			tags = "update-Policy record",
+			httpMethod = "PUT")
+	@PutMapping("/admin/updatepolicy")
 	public ResponseEntity<Policy> updatePolicy(@RequestBody Policy policy) {
 		try {
 			Policy plcy=iAdminService.updatePolicy(policy);
@@ -161,8 +203,12 @@ public class AdminController
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	
-	@DeleteMapping("/deletepolicy/{policyId}")
+	@ApiOperation(value = "Delete Policy",
+			response = String.class,
+			consumes = "policyId",
+			tags = "delete-policy record",
+			httpMethod = "DELETE")
+	@DeleteMapping("/admin/deletepolicy/{policyId}")
 	public ResponseEntity<String> deletePolicy(@PathVariable Integer policyId)
 	{
 		try {
@@ -172,8 +218,12 @@ public class AdminController
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	
-	@GetMapping("/getall")
+	@ApiOperation(value = "Get Admins",
+			response = Admin.class,
+			
+			tags = "get-all admins",			
+			httpMethod = "GET")
+	@GetMapping("/admin/getall")
 	public ResponseEntity<List<Admin>> getAllAdmins()
 	{
 		try {
@@ -183,8 +233,12 @@ public class AdminController
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	
-	@GetMapping("/getbyid/{adminId}")
+	@ApiOperation(value = "Get Admin",
+			response = Admin.class,
+			consumes = "adminId",
+			tags = "get-admin by Id",			
+			httpMethod = "GET")
+	@GetMapping("/admin/getbyid/{adminId}")
 	public ResponseEntity<Admin> getAdminById(@PathVariable Integer adminId)
 	{
 		try {
@@ -194,18 +248,26 @@ public class AdminController
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	
-	@PostMapping("/add")
-	public ResponseEntity<Admin> addAdmin(@RequestBody Admin admin) {
-		try {
-			Admin Adn=iAdminService.addAdmin(admin);
-			return new ResponseEntity<>(Adn, HttpStatus.OK);
-		}catch(AdminNotFoundException e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-		}
-	}
-	
-	@PutMapping("/update")
+//	@ApiOperation(value = "Add Admin",
+//			response = Admin.class,
+//			consumes = "Admin Object",
+//			tags = "post-admin record",
+//			httpMethod = "POST")
+//	@PostMapping("/admin/add")
+//	public ResponseEntity<Admin> addAdmin(@RequestBody Admin admin) {
+//		try {
+//			Admin Adn=iAdminService.addAdmin(admin);
+//			return new ResponseEntity<>(Adn, HttpStatus.OK);
+//		}catch(AdminNotFoundException e) {
+//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+//		}
+//	}
+	@ApiOperation(value = "Update Admin",
+			response = Admin.class,
+			consumes = "Admin Object",
+			tags = "update-admin record",
+			httpMethod = "PUT")
+	@PutMapping("/admin/update")
 	public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin) {
 		try {
 			Admin Adn=iAdminService.updateAdmin(admin);
@@ -214,8 +276,12 @@ public class AdminController
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	
-	@DeleteMapping("/delete/{adminId}")
+	@ApiOperation(value = "Delete Admin",
+			response = String.class,
+			consumes = "adminId",
+			tags = "delete-admin record",
+			httpMethod = "DELETE")
+	@DeleteMapping("/admin/delete/{adminId}")
 	public ResponseEntity<String> deleteAdmin(@PathVariable Integer AdminId)
 	{
 		try {
@@ -225,18 +291,26 @@ public class AdminController
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-	
-	@PostMapping("/addagent")
-	public ResponseEntity<Agent> addAgent(@RequestBody Agent agent) {
-		try {
-			Agent agt= iAdminService.addAgent(agent);
-			return new ResponseEntity<>(agt, HttpStatus.OK);
-		}catch(AgentException e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-		}
-	}
-
-	@PutMapping("/updateagent")
+//	@ApiOperation(value = "Add Agent",
+//			response = Agent.class,
+//			consumes = "Agent Object",
+//			tags = "post-agent record",
+//			httpMethod = "POST")
+//	@PostMapping("/admin/addagent")
+//	public ResponseEntity<Agent> addAgent(@RequestBody Agent agent) {
+//		try {
+//			Agent agt= iAdminService.addAgent(agent);
+//			return new ResponseEntity<>(agt, HttpStatus.OK);
+//		}catch(AgentException e) {
+//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+//		}
+//	}
+	@ApiOperation(value = "Update Agent",
+			response = Agent.class,
+			consumes = "Agent Object",
+			tags = "update-agent record-by admin",
+			httpMethod = "PUT")
+	@PutMapping("/admin/updateagent")
 	public ResponseEntity<Agent> updateAgent(@RequestBody Agent agent) {
 		try {
 			Agent agt= iAdminService.updateAgent(agent);
@@ -245,29 +319,41 @@ public class AdminController
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-
-	@DeleteMapping("/removeagent/{agtId}")
-	public ResponseEntity<String> removeAgent(@PathVariable Integer agtId) {
+	@ApiOperation(value = "Delete Agent",
+			response = String.class,
+			consumes = "agent_id",
+			tags = "delete-agent record",
+			httpMethod = "DELETE")
+	@DeleteMapping("/admin/removeagent/{agent_id}")
+	public ResponseEntity<String> removeAgent(@PathVariable Integer agent_id) {
 		try {
-			iAdminService.removeAgent(agtId);
+			iAdminService.removeAgent(agent_id);
 			return new ResponseEntity<>("Agent deleted", HttpStatus.OK);
 		}catch(AgentNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 	}
-
-	@GetMapping("/findagentbyid/{agtId}")
-	public ResponseEntity<Agent> findAgentById(@PathVariable Integer agtId){
+	@ApiOperation(value = "Get Agent",
+			response = Agent.class,
+			consumes = "agent_id",
+			tags = "get-agent by Id",			
+			httpMethod = "GET")
+	@GetMapping("/admin/findagentbyid/{agent_id}")
+	public ResponseEntity<Agent> findAgentById(@PathVariable Integer agent_id){
 		try {
-			Agent agent = iAdminService.findAgentById(agtId);
+			Agent agent = iAdminService.findAgentById(agent_id);
 			return new ResponseEntity<>(agent, HttpStatus.OK);
 		}catch(AgentNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
 
 	}
-
-	@GetMapping("/viewallagents")
+	@ApiOperation(value = "Get Agents",
+			response = Agent.class,
+			
+			tags = "get-all agents",			
+			httpMethod = "GET")
+	@GetMapping("/admin/viewallagents")
 	public ResponseEntity<List<Agent>> viewAllAgents(){
 		try {
 			List<Agent> agentList = iAdminService.viewAllAgents();

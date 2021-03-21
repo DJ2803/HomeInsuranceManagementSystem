@@ -9,8 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,9 +35,12 @@ public class Agent {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	 @Column(name="agent_Id")
 	private int agentId;
-	private String agent_Name;
+	private String agentName;
 	private String designation;
 	private Double salary; 
+	@OneToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	private User user;
 	@OneToMany(mappedBy="agent")
 	@JsonIgnore
 	private Set<PolicyHolder> policyHoldersList;
@@ -45,9 +50,15 @@ public class Agent {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Admin admin;
+	public Agent(int agentId, String agent_Name, User user) {
+		super();
+		this.agentId = agentId;
+		this.agentName = agent_Name;
+		this.user = user;
+	}
 	@Override
 	public String toString() {
-		return "Agent [agentId=" + agentId + ", agent_Name=" + agent_Name + ", designation=" + designation + ", salary="
+		return "Agent [agentId=" + agentId + ", agent_Name=" + agentName + ", designation=" + designation + ", salary="
 				+ salary + "]";
 	}
 }
