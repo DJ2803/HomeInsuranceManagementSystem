@@ -3,9 +3,13 @@ package com.cg.hims.entities;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,15 +25,22 @@ import lombok.Setter;
 public class Admin 
 {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int adminId;
-	private String adminName;
-	private String contact;
-//	@OneToMany(mappedBy = "admin")
-//	private Set<PolicyHolder> policyholders;
+	private String admin_Name;
+	@OneToMany(mappedBy = "admin")
+	@JsonIgnore
+	private Set<PolicyHolder> policyholders;
 	@OneToMany(mappedBy="admin")
+	@JsonIgnore
 	private Set<Agent> agents;
 //	@OneToMany(mappedBy="admin")
-//	private Set<Agent> transactions;
-//	@OneToMany(mappedBy="admin")
-//	private Set<Agent> policydetails;
+//	private Set<Transactions> transactions;
+	@OneToMany(mappedBy="admin")
+	@JsonIgnore
+	private Set<Policy> policydetails;
+
+
+
+	
 }

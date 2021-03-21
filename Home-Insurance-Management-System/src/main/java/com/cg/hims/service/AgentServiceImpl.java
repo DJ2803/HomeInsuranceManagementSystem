@@ -10,11 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cg.hims.entities.Agent;
 import com.cg.hims.entities.PolicyHolder;
+import com.cg.hims.entities.Quote;
 import com.cg.hims.exceptions.AgentException;
 import com.cg.hims.exceptions.AgentNotFoundException;
 import com.cg.hims.exceptions.PolicyHolderNotFoundException;
+import com.cg.hims.exceptions.QuoteNotFoundException;
 import com.cg.hims.repository.AgentRepository;
 import com.cg.hims.repository.PolicyHolderRepository;
+import com.cg.hims.repository.QuoteRepository;
 
 
 
@@ -25,6 +28,8 @@ public class AgentServiceImpl implements AgentService{
 	private AgentRepository agentRepository;
 	@Autowired
 	private PolicyHolderRepository iPolicyHolderRepository;
+	@Autowired
+	private QuoteRepository qr;
 	
 	@Override
 	public Agent addAgent(Agent agent) throws AgentException
@@ -58,19 +63,19 @@ public class AgentServiceImpl implements AgentService{
 		
 	}
 
-	@Override
-	public void removeAgent(int agentId) throws AgentNotFoundException
-	{
-		try {
-			agentRepository.deleteById(agentId);
-		}catch(DataAccessException e) {
-			//converting SQLException to EmployeeException
-			throw new AgentNotFoundException(e.getMessage());
-		}catch(Exception e) {
-			//converting SQLException to EmployeeException
-			throw new AgentNotFoundException(e.getMessage());
-		}
-	}
+//	@Override
+//	public void removeAgent(int agentId) throws AgentNotFoundException
+//	{
+//		try {
+//			agentRepository.deleteById(agentId);
+//		}catch(DataAccessException e) {
+//			//converting SQLException to EmployeeException
+//			throw new AgentNotFoundException(e.getMessage());
+//		}catch(Exception e) {
+//			//converting SQLException to EmployeeException
+//			throw new AgentNotFoundException(e.getMessage());
+//		}
+//	}
 
 	@Override
 	public Agent findAgentById(int agentId) throws AgentNotFoundException
@@ -91,41 +96,41 @@ public class AgentServiceImpl implements AgentService{
 		}
 	}
 
-	@Override
-	public List<Agent> viewAllAgents() throws AgentException
-	{
-		try {
-			return agentRepository.findAll();
-		}catch(DataAccessException e) {
-			//converting SQLException to EmployeeException
-			throw new AgentException(e.getMessage());
-		}catch(Exception e) {
-			//converting SQLException to EmployeeException
-			throw new AgentException(e.getMessage());
-		}
-	}
+//	@Override
+//	public List<Agent> viewAllAgents() throws AgentException
+//	{
+//		try {
+//			return agentRepository.findAll();
+//		}catch(DataAccessException e) {
+//			//converting SQLException to EmployeeException
+//			throw new AgentException(e.getMessage());
+//		}catch(Exception e) {
+//			//converting SQLException to EmployeeException
+//			throw new AgentException(e.getMessage());
+//		}
+//	}
 	
-	@Override
-	public PolicyHolder addPolicyHolder(PolicyHolder policyHolder) throws PolicyHolderNotFoundException {
-		try {			
-			return iPolicyHolderRepository.save(policyHolder);
-		}catch(DataAccessException e) {
-			throw new PolicyHolderNotFoundException(e.getMessage());
-		}catch(Exception e) {
-			throw new PolicyHolderNotFoundException(e.getMessage());
-		}
-	}
-
-	@Override
-	public PolicyHolder updatePolicyHolder(PolicyHolder policyHolder) throws PolicyHolderNotFoundException {
-		try {			
-			return iPolicyHolderRepository.save(policyHolder);
-		}catch(DataAccessException e) {
-			throw new PolicyHolderNotFoundException(e.getMessage());
-		}catch(Exception e) {
-			throw new PolicyHolderNotFoundException(e.getMessage());
-		}
-	}
+//	@Override
+//	public PolicyHolder addPolicyHolder(PolicyHolder policyHolder) throws PolicyHolderNotFoundException {
+//		try {			
+//			return iPolicyHolderRepository.save(policyHolder);
+//		}catch(DataAccessException e) {
+//			throw new PolicyHolderNotFoundException(e.getMessage());
+//		}catch(Exception e) {
+//			throw new PolicyHolderNotFoundException(e.getMessage());
+//		}
+//	}
+//
+//	@Override
+//	public PolicyHolder updatePolicyHolder(PolicyHolder policyHolder) throws PolicyHolderNotFoundException {
+//		try {			
+//			return iPolicyHolderRepository.save(policyHolder);
+//		}catch(DataAccessException e) {
+//			throw new PolicyHolderNotFoundException(e.getMessage());
+//		}catch(Exception e) {
+//			throw new PolicyHolderNotFoundException(e.getMessage());
+//		}
+//	}
 
 	@Override
 	public void deletePolicyHolder(Integer policyHolderId) throws PolicyHolderNotFoundException {
@@ -162,6 +167,74 @@ public class AgentServiceImpl implements AgentService{
 			throw new PolicyHolderNotFoundException(e.getMessage());
 		}catch(Exception e) {
 			throw new PolicyHolderNotFoundException(e.getMessage());
+		}
+	}
+	@Override
+	public Quote addQuote(Quote quote) throws QuoteNotFoundException {
+		try {			
+			return qr.save(quote);
+		}catch(DataAccessException e) {
+			//converting SQLException to EmployeeException
+			throw new QuoteNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			//converting SQLException to EmployeeException
+			throw new QuoteNotFoundException(e.getMessage());
+		}
+	}
+
+	@Override
+	public Quote updateQuote(Quote quote) throws QuoteNotFoundException {
+		try {			
+			return qr.save(quote);
+		}catch(DataAccessException e) {
+			//converting SQLException to EmployeeException
+			throw new QuoteNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			//converting SQLException to EmployeeException
+			throw new QuoteNotFoundException(e.getMessage());
+		}
+	}
+
+	@Override
+	public Quote findQuoteById(int id) throws QuoteNotFoundException {
+		try {
+			Optional<Quote> optional= qr.findById(id);
+			if(optional.isPresent()) {
+				return optional.get();
+			}else {
+				throw new Exception("Invalid PolicyHolderID");
+			}
+		}catch(DataAccessException e) {
+			//converting SQLException to EmployeeException
+			throw new QuoteNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			//converting SQLException to EmployeeException
+			throw new QuoteNotFoundException(e.getMessage());
+		}
+	}
+
+	@Override
+	public void removeQuote(int id) throws QuoteNotFoundException {
+		try {
+			qr.deleteById(id);
+		}catch(DataAccessException e) {
+			//converting SQLException to EmployeeException
+			throw new QuoteNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			//converting SQLException to EmployeeException
+			throw new QuoteNotFoundException(e.getMessage());
+		}	}
+
+	@Override
+	public List<Quote> showAllQuotes() throws QuoteNotFoundException {
+		try {
+			return qr.findAll();
+		}catch(DataAccessException e) {
+			//converting SQLException to EmployeeException
+			throw new QuoteNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			//converting SQLException to EmployeeException
+			throw new QuoteNotFoundException(e.getMessage());
 		}
 	}
 	

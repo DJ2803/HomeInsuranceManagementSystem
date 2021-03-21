@@ -1,7 +1,8 @@
 package com.cg.hims.entities;
 
-import java.util.List;
+import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,30 +16,27 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "PROPERTY")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
 @ToString
-public class Property {
-
+@Table(name="Property")
+public class Property implements Serializable {
 	@Id
+	@Column(name="property_Id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	
 	private int propertyId;
-	private int marketValue;
-	private int yearBuilt;
-	private int squareFootage;
-//	private double dwellingStyle;
-//	private String roofMaterial ;
-//	private String garageType;
-//	private int fullBathCount;
-//	private int halfBathCount;
-	private boolean hasSwimmingPool;
+	private long market_value;
+	private int year_built;
+	private int square_footage;
+	private boolean has_Swimming_Pool;
+
+	
+	
+	
+	
 	
 	
 	
 }
-
-

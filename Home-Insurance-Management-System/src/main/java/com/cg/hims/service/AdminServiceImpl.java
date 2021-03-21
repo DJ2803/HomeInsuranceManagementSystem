@@ -16,6 +16,7 @@ import com.cg.hims.entities.PolicyHolder;
 import com.cg.hims.entities.Transactions;
 import com.cg.hims.entities.Admin;
 import com.cg.hims.exceptions.AdminNotFoundException;
+import com.cg.hims.exceptions.AgentException;
 import com.cg.hims.exceptions.AgentNotFoundException;
 import com.cg.hims.exceptions.PolicyHolderNotFoundException;
 import com.cg.hims.exceptions.PolicyNotFoundException;
@@ -40,64 +41,81 @@ public class AdminServiceImpl implements AdminService
 	@Autowired
 	private AdminRepository iAdminRepository;
 	@Override
-	public Agent addAgent(Agent agent) throws AgentNotFoundException 
+	public Agent addAgent(Agent agent) throws AgentException
 	{
 		try {			
 			return iAgentRepository.save(agent);
 		}catch(DataAccessException e) {
-			throw new AgentNotFoundException(e.getMessage());
+			//converting SQLException to EmployeeException
+			throw new AgentException(e.getMessage());
 		}catch(Exception e) {
-			throw new AgentNotFoundException(e.getMessage());
+			//converting SQLException to EmployeeException
+			throw new AgentException(e.getMessage());
 		}
+		
 	}
 
 	@Override
-	public Agent updateAgent(Agent agent) throws AgentNotFoundException {
-		try {			
+	public Agent updateAgent(Agent agent) throws AgentNotFoundException
+	{
+		try {
 			return iAgentRepository.save(agent);
 		}catch(DataAccessException e) {
+			//converting SQLException to EmployeeException
 			throw new AgentNotFoundException(e.getMessage());
 		}catch(Exception e) {
+			//converting SQLException to EmployeeException
 			throw new AgentNotFoundException(e.getMessage());
 		}
+		
+		
+		
 	}
 
 	@Override
-	public void deleteAgent(Integer agentId) throws AgentNotFoundException {
-		try {			
+	public void removeAgent(int agentId) throws AgentNotFoundException
+	{
+		try {
 			iAgentRepository.deleteById(agentId);
 		}catch(DataAccessException e) {
+			//converting SQLException to EmployeeException
 			throw new AgentNotFoundException(e.getMessage());
 		}catch(Exception e) {
+			//converting SQLException to EmployeeException
 			throw new AgentNotFoundException(e.getMessage());
 		}
 	}
 
 	@Override
-	public Agent getAgentById(Integer agentId) throws AgentNotFoundException {
-		try {			
-			Optional<Agent> optional=iAgentRepository.findById(agentId);
+	public Agent findAgentById(int agentId) throws AgentNotFoundException
+	{
+		try {
+			Optional<Agent> optional= iAgentRepository.findById(agentId);
 			if(optional.isPresent()) {
 				return optional.get();
 			}else {
-				throw new Exception("Invalid Agent Id");
+				throw new Exception("Invalid Agentno");
 			}
 		}catch(DataAccessException e) {
+			//converting SQLException to EmployeeException
 			throw new AgentNotFoundException(e.getMessage());
 		}catch(Exception e) {
+			//converting SQLException to EmployeeException
 			throw new AgentNotFoundException(e.getMessage());
 		}
 	}
 
 	@Override
-	public List<Agent> getAllAgents() throws AgentNotFoundException 
+	public List<Agent> viewAllAgents() throws AgentException
 	{
-		try {			
+		try {
 			return iAgentRepository.findAll();
 		}catch(DataAccessException e) {
-			throw new AgentNotFoundException(e.getMessage());
+			//converting SQLException to EmployeeException
+			throw new AgentException(e.getMessage());
 		}catch(Exception e) {
-			throw new AgentNotFoundException(e.getMessage());
+			//converting SQLException to EmployeeException
+			throw new AgentException(e.getMessage());
 		}
 	}
 

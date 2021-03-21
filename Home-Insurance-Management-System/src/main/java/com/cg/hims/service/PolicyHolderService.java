@@ -16,18 +16,19 @@ public interface PolicyHolderService {
 
 	public String updatePolicyHolder(PolicyHolder policyHolder) throws PolicyHolderNotFoundException;
 
-	public PolicyHolder findPolicyHolderById(int id) throws PolicyHolderNotFoundException;
+	public PolicyHolder viewPolicyHolder(int policy_holder_id) throws PolicyHolderNotFoundException;
 	
-	public List<Policy> showAllPolicies() throws PolicyNotFoundException;
+	public Policy viewPolicy(int policy_id) throws PolicyNotFoundException;
 	
-	public Property viewPropertyById(int id) throws Exception;
+	public Property viewProperty(int property_id) throws Exception;
 	
-	public Quote findQuoteById(int id) throws QuoteNotFoundException;
+	public Quote viewQuote(int quote_id) throws QuoteNotFoundException;
 	
-	public Property addProperty(Property property) throws Exception;
+	public Quote updateQuote(Quote quote) throws QuoteNotFoundException;
+	
+//	public Property addProperty(Property property) throws Exception;
 
-//	public void removePolicyHolder(int id) throws PolicyHolderNotFoundException;
+	public void removePolicyHolder(int id) throws PolicyHolderNotFoundException;
 //
 //	public List<PolicyHolder> showAllPolicyHolders() throws PolicyHolderNotFoundException;
-
 }

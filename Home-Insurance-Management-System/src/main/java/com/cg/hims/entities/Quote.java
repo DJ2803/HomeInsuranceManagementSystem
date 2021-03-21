@@ -1,5 +1,8 @@
 package com.cg.hims.entities;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,46 +10,46 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ManyToAny;
 
-@NoArgsConstructor
-@Data
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
-@Table(name="quote")
-public class Quote {
-	
-	
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@Table(name="Quote")
+public class Quote implements Serializable {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="quote_id")
-	private int quote_id;
-	private String premium_type;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int quoteId;
+	private String premium_Type;
 	private double premium_amount;
-	private double dwelling_coverage;
-	private double detached_structure_coverage;
-	private double personal_property_coverage;
-	private double additional_living_expense;
-	private double medical_expense;
-	private double deducible_amount;
+	private double dwelling_Coverage;
+	private double detached_Structure_Coverage;
+	private double personal_Property_Coverage;
+	private double additional_Living_Expense;
+	private double medical_Expense;
+	private double deducible_Amount;
+//	@OneToMany(mappedBy="Quote")
+//	private List<Transactions> TransactionsList;
+	
 	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Agent agent;
 	
-	public Quote(String premium_type, double premium_amount, double dwelling_coverage,
-			double detached_structure_coverage, double personal_property_coverage, double additional_living_expense,
-			double medical_expense, double deducible_amount) {
-		super();
-		this.premium_type = premium_type;
-		this.premium_amount = premium_amount;
-		this.dwelling_coverage = dwelling_coverage;
-		this.detached_structure_coverage = detached_structure_coverage;
-		this.personal_property_coverage = personal_property_coverage;
-		this.additional_living_expense = additional_living_expense;
-		this.medical_expense = medical_expense;
-		this.deducible_amount = deducible_amount;
-	}
 	
 	
 

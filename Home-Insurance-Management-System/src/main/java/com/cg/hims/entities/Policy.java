@@ -1,6 +1,9 @@
 package com.cg.hims.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,43 +11,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 @Entity
 @NoArgsConstructor
-@Data
-@Table(name="policydetails")
-public class Policy {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	//@Column(name="policy_id")
-	private int policy_id;
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@Table(name="Policy")
+public class Policy implements Serializable {
+    @Id
+   
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	private int policyId;
 	private String policy_name;
-	private LocalDate policy_end_date;
-	private LocalDate policy_effective_date;
-	private int policy_term;
-	private String policy_status;
-	
+	private LocalDate policy_End_Date;
+	private LocalDate policy_Effective_Date;
+	private int policy_Terrm;
+	private String policy_Status;
+//	@OneToMany(mappedBy="Policy")
+//	private List<Transactions> TransactionsList;
+//	private PolicyHolder policyHolder;
 	@ManyToOne(cascade = CascadeType.ALL)
-	private PolicyHolder policyHolder;
-
-	public Policy(String policy_name, LocalDate policy_end_date, LocalDate policy_effective_date, int policy_term,
-			String policy_status) {
-		super();
-		this.policy_name = policy_name;
-		this.policy_end_date = policy_end_date;
-		this.policy_effective_date = policy_effective_date;
-		this.policy_term = policy_term;
-		this.policy_status = policy_status;
-//		this.policyHolder = policyHolder;
-	}
-
-	
-	
-	
+	@JsonIgnore
+	private Admin admin;
 
 }

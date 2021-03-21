@@ -1,6 +1,5 @@
 package com.cg.hims.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,10 +60,10 @@ public class PolicyHolderServiceImpl implements PolicyHolderService {
 	}
 
 	@Override
-	public PolicyHolder findPolicyHolderById(int id) throws PolicyHolderNotFoundException {
+	public PolicyHolder viewPolicyHolder(int policy_holder_id) throws PolicyHolderNotFoundException {
 		
 		try {
-			Optional<PolicyHolder> optional= ph.findById(id);
+			Optional<PolicyHolder> optional= ph.findById(policy_holder_id);
 			if(optional.isPresent()) {
 				return optional.get();
 			}else {
@@ -80,22 +79,27 @@ public class PolicyHolderServiceImpl implements PolicyHolderService {
 	}
 	
 	@Override
-	public List<Policy> showAllPolicies() throws PolicyNotFoundException {
-		try {			
-			return pr.findAll();
-		}catch(DataAccessException e) {
-			//converting SQLException to EmployeeException
-			throw new PolicyNotFoundException(e.getMessage());
-		}catch(Exception e) {
-			//converting SQLException to EmployeeException
-			throw new PolicyNotFoundException(e.getMessage());
-		}
-	}
-	
-	@Override
-	public Quote findQuoteById(int id) throws QuoteNotFoundException {
+	public Policy viewPolicy(int policy_id) throws PolicyNotFoundException {
 		try {
-			Optional<Quote> optional= qr.findById(id);
+		Optional<Policy> optional= pr.findById(policy_id);
+		if(optional.isPresent()) {
+			return optional.get();
+		}else {
+			throw new Exception("Invalid PolicyID");
+		}
+		}catch(DataAccessException e) {
+			//converting SQLException to EmployeeException
+			throw new PolicyNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			//converting SQLException to EmployeeException
+			throw new PolicyNotFoundException(e.getMessage());
+		}
+	}
+	
+	@Override
+	public Quote viewQuote(int quote_id) throws QuoteNotFoundException {
+		try {
+			Optional<Quote> optional= qr.findById(quote_id);
 			if(optional.isPresent()) {
 				return optional.get();
 			}else {
@@ -110,10 +114,10 @@ public class PolicyHolderServiceImpl implements PolicyHolderService {
 		}
 	}
 	
-	public Property viewPropertyById(int id) throws Exception
+	public Property viewProperty(int property_id) throws Exception
 	{
 		try {
-			Optional<Property> optional= holderProperty.findById(id);
+			Optional<Property> optional= holderProperty.findById(property_id);
 			if(optional.isPresent()) {
 				return optional.get();
 			}else {
@@ -126,16 +130,31 @@ public class PolicyHolderServiceImpl implements PolicyHolderService {
 	}
 
 
-	
-	public Property addProperty(Property property) throws Exception
-	{	
+	@Override
+	public Quote updateQuote(Quote quote) throws QuoteNotFoundException {
 		try {			
-			return holderProperty.save(property);
+			  return qr.save(quote);
+			  
 		}catch(DataAccessException e) {
 			//converting SQLException to EmployeeException
-			throw new Exception(e.getMessage());
+			throw new QuoteNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			//converting SQLException to EmployeeException
+			throw new QuoteNotFoundException(e.getMessage());
 		}
 	}
+
+
+	
+//	public Property addProperty(Property property) throws Exception
+//	{	
+//		try {			
+//			return holderProperty.save(property);
+//		}catch(DataAccessException e) {
+//			//converting SQLException to EmployeeException
+//			throw new Exception(e.getMessage());
+//		}
+//	}
 
 //	@Override
 //	public List<PolicyHolder> showAllPolicyHolders() throws PolicyHolderNotFoundException{
@@ -150,19 +169,19 @@ public class PolicyHolderServiceImpl implements PolicyHolderService {
 //		}
 //	}
 
-//	@Override
-//	public void removePolicyHolder(int id) throws PolicyHolderNotFoundException {
-//		try {
-//			ph.deleteById(id);
-//		}catch(DataAccessException e) {
-//			//converting SQLException to EmployeeException
-//			throw new PolicyHolderNotFoundException(e.getMessage());
-//		}catch(Exception e) {
-//			//converting SQLException to EmployeeException
-//			throw new PolicyHolderNotFoundException(e.getMessage());
-//		}
-//		
-//	}
+	@Override
+	public void removePolicyHolder(int id) throws PolicyHolderNotFoundException {
+		try {
+			ph.deleteById(id);
+		}catch(DataAccessException e) {
+			//converting SQLException to EmployeeException
+			throw new PolicyHolderNotFoundException(e.getMessage());
+		}catch(Exception e) {
+			//converting SQLException to EmployeeException
+			throw new PolicyHolderNotFoundException(e.getMessage());
+		}
+		
+	}
 	
 	
 }

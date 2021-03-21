@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,63 +12,59 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Transient;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
 
 @Entity
-@ NoArgsConstructor
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
+@Setter
+@ToString
 @Table(name="policyholder")
 public class PolicyHolder {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+     @Id
+     
+     @GeneratedValue(strategy = GenerationType.AUTO)
 	private int policyHolderId;
-	private String policy_holder_name;
-	private String credit_card;
+	private String policy_Holder_Name;
+	private String credit_Card;
 	private LocalDate dob;
 	private String occupation;
-	private double annual_income;
-	private Boolean is_retired;
+	private double annual_Income;
+	private boolean is_Retired;
 	private String residence_type;
 	private String city;
 	private String state;
 	private long zip;
-	private String residence_use;
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private String  residence_use;
+	@ManyToOne(cascade= CascadeType.ALL)
+	@JsonIgnore
+	@JoinColumn(name="agent_id")
+	private Agent agent;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Admin admin;
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="quote_id")
-	@Transient
 	private Quote quote;
 	
-	@ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
-	private Agent agent;
-	
-	@OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="property_id")
-	@Transient
 	private Property property;
 	
-	@OneToMany(mappedBy="policyHolder")
-	@Transient
-	private Set<Policy> policy;
-
-	@Override
-	public String toString() {
-		return "PolicyHolder [policyHolderId=" + policyHolderId + ", policy_holder_name=" + policy_holder_name
-				+ ", credit_card=" + credit_card + ", dob=" + dob + ", occupation=" + occupation + ", annual_income="
-				+ annual_income + ", is_retired=" + is_retired + ", residence_type=" + residence_type + ", city=" + city
-				+ ", state=" + state + ", zip=" + zip + ", residence_use=" + residence_use + ", quote=" + quote
-				+ ", property=" + property + ", policy=" + policy + "]";
-	}
-	
+	@OneToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name="policy_id")
+	private Policy policy;
 	
 	
 }

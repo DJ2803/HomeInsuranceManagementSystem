@@ -33,8 +33,7 @@ public class AdminController
 {
 	@Autowired
 	private AdminService iAdminService;
-	@Autowired
-	private AgentService agentService;
+	
 	
 	@GetMapping("/getallpolicyholders")
 	public ResponseEntity<List<PolicyHolder>> getAllPolicyHolders(){
@@ -63,7 +62,7 @@ public class AdminController
 			return new ResponseEntity<>(policyHolder, HttpStatus.OK);
 		}catch(PolicyHolderNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
-		}
+		} 
 	}
 	
 	@GetMapping("/getpolicyholderbyid/{policyHolderId}")
@@ -230,7 +229,7 @@ public class AdminController
 	@PostMapping("/addagent")
 	public ResponseEntity<Agent> addAgent(@RequestBody Agent agent) {
 		try {
-			Agent agt= agentService.addAgent(agent);
+			Agent agt= iAdminService.addAgent(agent);
 			return new ResponseEntity<>(agt, HttpStatus.OK);
 		}catch(AgentException e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
@@ -240,7 +239,7 @@ public class AdminController
 	@PutMapping("/updateagent")
 	public ResponseEntity<Agent> updateAgent(@RequestBody Agent agent) {
 		try {
-			Agent agt= agentService.updateAgent(agent);
+			Agent agt= iAdminService.updateAgent(agent);
 			return new ResponseEntity<>(agt, HttpStatus.OK);
 		}catch(AgentNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
@@ -250,8 +249,8 @@ public class AdminController
 	@DeleteMapping("/removeagent/{agtId}")
 	public ResponseEntity<String> removeAgent(@PathVariable Integer agtId) {
 		try {
-			agentService.removeAgent(agtId);
-			return new ResponseEntity<>("Employee deleted", HttpStatus.OK);
+			iAdminService.removeAgent(agtId);
+			return new ResponseEntity<>("Agent deleted", HttpStatus.OK);
 		}catch(AgentNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
 		}
@@ -260,7 +259,7 @@ public class AdminController
 	@GetMapping("/findagentbyid/{agtId}")
 	public ResponseEntity<Agent> findAgentById(@PathVariable Integer agtId){
 		try {
-			Agent agent = agentService.findAgentById(agtId);
+			Agent agent = iAdminService.findAgentById(agtId);
 			return new ResponseEntity<>(agent, HttpStatus.OK);
 		}catch(AgentNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
@@ -271,7 +270,7 @@ public class AdminController
 	@GetMapping("/viewallagents")
 	public ResponseEntity<List<Agent>> viewAllAgents(){
 		try {
-			List<Agent> agentList = agentService.viewAllAgents();
+			List<Agent> agentList = iAdminService.viewAllAgents();
 			return new ResponseEntity<>(agentList, HttpStatus.OK);
 		}catch(AgentException e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
