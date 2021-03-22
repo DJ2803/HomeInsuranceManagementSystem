@@ -19,12 +19,19 @@ import com.cg.hims.entities.Policy;
 import com.cg.hims.exceptions.PolicyNotFoundException;
 import com.cg.hims.service.PolicyServiceImpl;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+@Api
 @RestController
 @RequestMapping("/policy")
 public class PolicyController {
 	@Autowired
 	private PolicyServiceImpl policyServiceImpl;
 
+	@ApiOperation(value = "Get all Policy",
+			response = Policy.class,
+			tags = "Get-all-Policy",			
+			httpMethod = "GET")
 	@GetMapping("/showall")
 	public ResponseEntity<List<Policy>> showAllPolicies() throws PolicyNotFoundException{
 		List<Policy> policyList = policyServiceImpl.showAllPolicies();
@@ -32,6 +39,11 @@ public class PolicyController {
 		
 	}
 
+	@ApiOperation(value = "Get Policy by Id",
+			response = Policy.class,
+			tags = "Get-Policy-By-Id",
+			consumes = "policyId",
+			httpMethod = "GET")
 	@GetMapping("/showbyid/{policyId}")
 	public ResponseEntity<Policy> findPolicyById(@PathVariable Integer policyId) {
 		try {
@@ -42,6 +54,11 @@ public class PolicyController {
 		}
 	}
 
+	@ApiOperation(value = "Add Policy",
+			response = Policy.class,
+			tags = "Add-Policy",
+			consumes = "policy Object",
+			httpMethod = "POST")
 	@PostMapping("/addpolicy")
 	public ResponseEntity<Policy> addPolicy(@RequestBody Policy policy) throws PolicyNotFoundException {
 		Policy policy1 = policyServiceImpl.addPolicy(policy);
@@ -49,6 +66,11 @@ public class PolicyController {
 		
 	}
 
+	@ApiOperation(value = "Update Policy",
+			response = Policy.class,
+			tags = "Update-Policy",
+			consumes = "policy Object",
+			httpMethod = "PUT")
 	@PutMapping("/updatepolicy/{policyId}")
 	public ResponseEntity<Policy> updatePolicy(@RequestBody Policy policy, @PathVariable Integer policyId) {
 		try {
@@ -60,6 +82,11 @@ public class PolicyController {
 		}
 	}
 
+	@ApiOperation(value = "Delete Policy",
+			response = String.class,
+			tags = "Delete-Policy",
+			consumes = "policyId",
+			httpMethod = "DELETE")
 	@DeleteMapping("/deletepolicy/{policyId}")
 	public ResponseEntity<String> removePolicy(@PathVariable Integer policyId) {
 		try {

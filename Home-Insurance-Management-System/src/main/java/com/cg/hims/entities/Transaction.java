@@ -3,6 +3,7 @@ package com.cg.hims.entities;
 
 import java.time.LocalTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,11 +30,13 @@ public class Transaction {
 	private String region;
 	private String paymentType;
 	
-	public Transaction(LocalTime transactionTime, String region, String paymenttype) {
+	
+	public Transaction(LocalTime transactionTime, String region, String paymentType) {
 		super();
 		this.transactionTime = transactionTime;
 		this.region = region;
 		this.paymentType = paymentType;
+		
 	}
 	
 	

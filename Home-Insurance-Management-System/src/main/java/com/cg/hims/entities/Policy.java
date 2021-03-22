@@ -1,11 +1,14 @@
 package com.cg.hims.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,20 +30,23 @@ public class Policy {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer policyId;
 	private String policyName;
-	private Date policyEffectiveDate;
-	private Date policyEndDate;
+	private LocalDate policyEffectiveDate;
+	private LocalDate policyEndDate;
 	private int policyTerm;
 	private String policyStatus;
-	//private int quoteId;
+	@OneToMany
+	@JoinColumn(name="policyId")
+	private List<Transaction> transactionsList;
 	
-	public Policy(String policyName, Date policyEffectiveDate, Date policyEndDate, int policyTerm, String policyStatus, int quoteId) {
+	
+	public Policy(String policyName, LocalDate policyEffectiveDate, LocalDate policyEndDate, int policyTerm, String policyStatus) {
 		super();
 		this.policyName = policyName;
 		this.policyEffectiveDate = policyEffectiveDate;
 		this.policyEndDate = policyEndDate;
 		this.policyTerm = policyTerm;
 		this.policyStatus = policyStatus;
-		//this.quoteId = quoteId;
+		
 	}
 
 	
