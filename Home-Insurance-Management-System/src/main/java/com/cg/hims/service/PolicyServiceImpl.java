@@ -19,34 +19,38 @@ public class PolicyServiceImpl implements PolicyService {
 	@Autowired
 	private PolicyRepository policyRepository;
 
-
+	/*
+	 * Add new policy
+	 */
 	@Override
 	public Policy addPolicy(Policy policy) throws PolicyNotFoundException {
 		try {
 			return policyRepository.save(policy); 
-		}catch(DataAccessException e) {
-			//converting SQLException to EmployeeException
+		}catch(DataAccessException e) {		
 			throw new PolicyNotFoundException(e.getMessage());
-		}catch(Exception e) {
-			//converting SQLException to EmployeeException
+		}catch(Exception e) {			
 			throw new PolicyNotFoundException(e.getMessage());
 		}
 	}
 
+	/*
+	 * Update the existing policy by taking comparing the policId
+	 */
 	@Override
 	public Policy updatePolicy(Policy policy) throws PolicyNotFoundException {
 		try {
 			return policyRepository.save(policy);
 		}catch(DataAccessException e) {
-			//converting SQLException to EmployeeException
 			throw new PolicyNotFoundException(e.getMessage());
 		}catch(Exception e) {
-			//converting SQLException to EmployeeException
 			throw new PolicyNotFoundException(e.getMessage());
 		}
 
 	}
 
+	/*
+	 * finds a specific policy depending upon the entered policyId by the user
+	 */
 	@Override
 	public Policy findPolicyById(Integer policyId) throws PolicyNotFoundException {
 		try {
@@ -56,44 +60,44 @@ public class PolicyServiceImpl implements PolicyService {
 			}else {
 				throw new Exception("Invalid Policy Id");
 			}
-		}catch(DataAccessException e) {
-			//converting SQLException to EmployeeException
+		}catch(DataAccessException e) {			
 			throw new PolicyNotFoundException(e.getMessage());
-		}catch(Exception e) {
-			//converting SQLException to EmployeeException
+		}catch(Exception e) {			
 			throw new PolicyNotFoundException(e.getMessage());
 		}
-		
+
 
 	}
 
+	/*
+	 * Removes a policy depending upon the policyId entered by the user
+	 */
 	@Override
 	public void removePolicy(Integer policyId) throws PolicyNotFoundException {
 		try {
 			policyRepository.deleteById(policyId);
-		}catch(DataAccessException e) {
-			//converting SQLException to EmployeeException
+		}catch(DataAccessException e) {			
 			throw new PolicyNotFoundException(e.getMessage());
-		}catch(Exception e) {
-			//converting SQLException to EmployeeException
+		}catch(Exception e) {			
 			throw new PolicyNotFoundException(e.getMessage());
 		}
-		
+
 	}
 
+	/*
+	 * Displays all policy
+	 */
 	@Override
 	public List<Policy> showAllPolicies() throws PolicyNotFoundException {
 		try {
 			return policyRepository.findAll();
-		}catch(DataAccessException e) {
-			//converting SQLException to EmployeeException
+		}catch(DataAccessException e) {			
 			throw new PolicyNotFoundException(e.getMessage());
 		}catch(Exception e) {
-			//converting SQLException to EmployeeException
 			throw new PolicyNotFoundException(e.getMessage());
 		}
-		
-		
+
+
 	}
 
 

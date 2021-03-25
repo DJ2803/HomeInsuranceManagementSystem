@@ -29,13 +29,15 @@ public class Transaction {
 	private LocalTime transactionTime;
 	private String region;
 	private String paymentType;
+	private Integer policyId;
 	
 	
-	public Transaction(LocalTime transactionTime, String region, String paymentType) {
+	public Transaction(LocalTime transactionTime, String region, String paymentType, Integer policyId) {
 		super();
 		this.transactionTime = transactionTime;
 		this.region = region;
 		this.paymentType = paymentType;
+		this.policyId=policyId;
 		
 	}
 	

@@ -27,7 +27,7 @@ public class SwaggerUiWebMvcConfigurer implements WebMvcConfigurer {
         .resourceChain(false);
   }
 
-  //http://localhost:8084/springfox/swagger-ui/index.html
+  //http://localhost:8085/springfox/swagger-ui/index.html
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
     registry.addViewController(baseUrl + "/swagger-ui/")

@@ -15,35 +15,43 @@ import com.cg.hims.repository.TransactionRepository;
 @Transactional
 public class TransactionServiceImpl implements TransactionService {
 	@Autowired
-	private TransactionRepository transactionRepository;
-	
+	private TransactionRepository transactionRepository;	
 
+	/*
+	 * Add new Transaction
+	 */
 	@Override
 	public Transaction addTransaction(Transaction transaction) throws TransactionNotFoundException {
 		try {
 			return transactionRepository.save(transaction); 
 		}catch(DataAccessException e) {
-			//converting SQLException to EmployeeException
+			
 			throw new TransactionNotFoundException(e.getMessage());
 		}catch(Exception e) {
-			//converting SQLException to EmployeeException
+			
 			throw new TransactionNotFoundException(e.getMessage());
 		}
 	}
 
+	/*
+	 * Update the existing Transaction by taking comparing the transactionId
+	 */
 	@Override
 	public Transaction updateTransaction(Transaction transaction) throws TransactionNotFoundException {
 		try {
 			return transactionRepository.save(transaction); 
 		}catch(DataAccessException e) {
-			//converting SQLException to EmployeeException
+			
 			throw new TransactionNotFoundException(e.getMessage());
 		}catch(Exception e) {
-			//converting SQLException to EmployeeException
+			
 			throw new TransactionNotFoundException(e.getMessage());
 		}
 	}
 
+	/*
+	 * finds a specific Transaction depending upon the transactionId entered by the user
+	 */
 	@Override
 	public Transaction findTransactionById(Integer transactionId) throws TransactionNotFoundException {
 		try {
@@ -54,37 +62,43 @@ public class TransactionServiceImpl implements TransactionService {
 				throw new Exception("Invalid Transaction Id");
 			}
 		}catch(DataAccessException e) {
-			//converting SQLException to EmployeeException
+			
 			throw new TransactionNotFoundException(e.getMessage());
 		}catch(Exception e) {
-			//converting SQLException to EmployeeException
+			
 			throw new TransactionNotFoundException(e.getMessage());
 		}
 	}
 
+	/*
+	 * Removes a Transaction depending upon the transactionId entered by the user
+	 */
 	@Override
 	public void removeTransaction(Integer transactionId) throws TransactionNotFoundException {
 		try {
 			transactionRepository.deleteById(transactionId);; 
 		}catch(DataAccessException e) {
-			//converting SQLException to EmployeeException
+			
 			throw new TransactionNotFoundException(e.getMessage());
 		}catch(Exception e) {
-			//converting SQLException to EmployeeException
+			
 			throw new TransactionNotFoundException(e.getMessage());
 		}
 
 	}
 
+	/*
+	 * Displays all transaction
+	 */
 	@Override
 	public List<Transaction> showAllTransaction() throws TransactionNotFoundException {
 		try {
 			return transactionRepository.findAll(); 
 		}catch(DataAccessException e) {
-			//converting SQLException to EmployeeException
+			
 			throw new TransactionNotFoundException(e.getMessage());
 		}catch(Exception e) {
-			//converting SQLException to EmployeeException
+			
 			throw new TransactionNotFoundException(e.getMessage());
 		}
 	}
