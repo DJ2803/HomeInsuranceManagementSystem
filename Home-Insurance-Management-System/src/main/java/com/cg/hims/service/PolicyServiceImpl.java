@@ -90,7 +90,10 @@ public class PolicyServiceImpl implements PolicyService {
 	@Override
 	public List<Policy> showAllPolicies() throws PolicyNotFoundException {
 		try {
-			return policyRepository.findAll();
+			List<Policy> policyList = policyRepository.findAll();
+			//System.out.println("Getting Data from Db "+policyList);
+			return policyList;
+			
 		}catch(DataAccessException e) {			
 			throw new PolicyNotFoundException(e.getMessage());
 		}catch(Exception e) {
