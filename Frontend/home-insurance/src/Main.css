@@ -1,0 +1,102 @@
+.inner {
+    background-image: url(./background.png) ;
+      position: fixed;
+      min-width: 100%;
+      min-height: 100%;
+      background-size: cover;
+      background-position: center;
+      font-family: 'American Captain';
+      font-size:x-large;
+      text-align: left;
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  .nav-link 
+  {
+    font-family: 'American Captain';
+    z-index: 100;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @font-face {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    src: url('fonts/AmericanCaptain.eot');
+    src: url('fonts/AmericanCaptain.eot?#iefix') format('embedded-opentype'),
+        url('fonts/AmericanCaptain.woff2') format('woff2'),
+        url('fonts/AmericanCaptain.woff') format('woff'),
+        url('fonts/AmericanCaptain.ttf') format('truetype'),
+        url('fonts/AmericanCaptain.svg#AmericanCaptain') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    src: url('fonts/ProcrastinatingPixie.eot');
+    src: url('fonts/ProcrastinatingPixie.eot?#iefix') format('embedded-opentype'),
+        url('fonts/ProcrastinatingPixie.woff2') format('woff2'),
+        url('fonts/ProcrastinatingPixie.woff') format('woff'),
+        url('fonts/ProcrastinatingPixie.ttf') format('truetype'),
+        url('fonts/ProcrastinatingPixie.svg#ProcrastinatingPixie') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    src: url('fonts/NexaBold.eot');
+    src: url('fonts/NexaBold.eot?#iefix') format('embedded-opentype'),
+        url('fonts/NexaBold.woff2') format('woff2'),
+        url('fonts/NexaBold.woff') format('woff'),
+        url('fonts/NexaBold.ttf') format('truetype'),
+        url('fonts/NexaBold.svg#NexaBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  .navbar-brand{
+    
+    font-family: 'American Captain';
+    color: rgb(255, 255, 255);
+   
+    /* padding-left: 25%;
+    padding-top: 0.5%; */
+    /* transform: translate(190%,10%); */
+  }
+  

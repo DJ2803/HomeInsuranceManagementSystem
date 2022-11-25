@@ -1,0 +1,32 @@
+.ScrollStyle
+{
+    max-height: 630px;
+    overflow-y: scroll;
+}
+.heading{
+    width: 100%;
+    text-align: center;
+    margin-top: 2%;
+    color: black;
+    font-size:larger;
+}
+.buttonforview{
+    position: relative;
+    left: 43.6%;
+}
+.buttonforview:hover{
+    background-color: rgb(33, 230, 99);
+}
+.buttonforlogout:hover{
+    background-color:#e84545;
+}
+.buttonforlogout{
+    position: relative;
+    left: 47%;
+}
+img.image{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    transform: translate(-260%,-30%);
+}
